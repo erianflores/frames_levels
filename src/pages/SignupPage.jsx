@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const SignupPage = () => {
+const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,3 +55,5 @@ export const SignupPage = () => {
     </div>
   );
 };
+
+export default SignupPage;
