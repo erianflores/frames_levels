@@ -1,9 +1,21 @@
-/*#featured-games {
+#featured-games {
     width: 100%;
     max-width: 1200px; 
     margin: auto; 
     overflow: visible; 
     position: relative;
+  }
+
+  .game-item {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .game-item img {
+    width: 100%; /* Ensure the image takes up the entire container width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image doesn't stretch */
+    border-radius: 8px; /* Optional: add rounded corners */
   }
   
 .slick-prev,
