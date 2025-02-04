@@ -23,9 +23,9 @@ function Navbar() {
       console.log("Login successful", data);
 
       // Save token in localStorage
-      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("authToken", data.authToken);
 
-      // Redirect to homepage or another page
+      // Redirect to homepage or dashboard pagew
       nav("/");
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
