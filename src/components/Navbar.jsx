@@ -23,7 +23,7 @@ function Navbar() {
       console.log("Login successful", data);
 
       // Save token in localStorage
-      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("authToken", data.authToken);
 
       // Redirect to homepage or another page
       nav("/");
