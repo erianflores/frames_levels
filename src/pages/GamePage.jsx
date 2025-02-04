@@ -15,6 +15,12 @@ const GamePage = () => {
      .then(data => {
         setGame(data);  
         setLoading(false);
+    return fetch(`http://localhost:5005/api/reviews/one-game/${data._id}`)
+     })
+     .then(response => response.json())
+     .then(data => {
+         setReviews(Array.isArray(data) ? data : []);
+         
      })
      .catch(error => {
         console.error("Error fetching game details:", error);
@@ -22,15 +28,6 @@ const GamePage = () => {
         setLoading(false);
      });
 
-     fetch(`http://localhost:5005/api/reviews/game/${id}`)
-     .then(response => response.json())
-     .then(data => {
-         setReviews(Array.isArray(data) ? data : []);
-     })
-     .catch(error => {
-         console.error("Error fetching reviews:", error);
-         setReviews([]); 
-     });
 }, [id]);
 
     const handleReviewSubmit = async (e) => {
@@ -43,7 +40,7 @@ const GamePage = () => {
             alert("You need to log in to submit a review.");
             return;
         }
-        const newReview = { gameTitle: game.name, gameId: id, body: reviewText, rating: 5 };
+        const newReview = { gameTitle: game.name, gameId: game._id, body: reviewText, rating: 5 };
 
         try {
             console.log("Token being sent:", token);
@@ -63,8 +60,9 @@ const GamePage = () => {
             }
             
             console.log("Review submitted successfully:", responseData);
+            
 
-            const updatedReviewsResponse = await fetch(`http://localhost:5005/api/reviews/game/${id}`);
+            const updatedReviewsResponse = await fetch(`http://localhost:5005/api/reviews/one-game/${game._id}`);
             const updatedReviews = await updatedReviewsResponse.json();
 
             setReviews(Array.isArray(updatedReviews) ? updatedReviews : []);
