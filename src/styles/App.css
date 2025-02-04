@@ -1,13 +1,12 @@
+@import "./Navbar.css";
 
-body,html {  
+body,
+html {
   height: 100%;
   margin: 0;
-
 }
 
 h1 {
   margin: 20px 0;
   font-size: 36px;
 }
-
-
