@@ -1,4 +1,5 @@
  import React, { useState, useEffect } from 'react';
+ import { Link } from 'react-router-dom';
  import Slider from 'react-slick';
  import 'slick-carousel/slick/slick.css'; 
  import 'slick-carousel/slick/slick-theme.css'; 
@@ -47,11 +48,13 @@ export const FeaturedGames = () => {
        <Slider {...settings}>
         {games.map(game => (
             <div key={game.id} className="game-item">
+              <Link to={`/games/${game.id}`}>
                 <img 
                 src={game.background_image || "https://via.placeholder.com/200"} 
                 alt={game.name} 
                 />
                 <h3>{game.name}</h3>
+                </Link>
             </div>
         ))}
        </Slider>

@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
-// import GameDetailsPage from "../pages/GameDetailsPage";
+ import GamePage from "../pages/GamePage";
 // import ProfilePage from "../pages/ProfilePage";
 
 const AppRoutes = () => {
@@ -11,10 +11,10 @@ const AppRoutes = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
-      {/* <Route path="/game/:id" element={<GameDetailsPage />} />
-      <Route path="/profile" element={<ProfilePage />} /> */}
+      <Route path="/games/:id" element={<GamePage />} />
+      {/*<Route path="/profile" element={<ProfilePage />} /> */}
     </Routes>
   );
-};
+}
 
 export default AppRoutes;
