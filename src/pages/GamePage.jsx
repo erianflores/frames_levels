@@ -8,17 +8,18 @@ const GamePage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [reviewText, setReviewText] = useState("");
-
+    const [reviewRating, setReviewRating] = useState(5);
     useEffect(() => {
-     fetch(`http://localhost:5005/api/games/${id}`)
-     .then(response => response.json())
-     .then(data => {
-        setGame(data);  
-        setLoading(false);
+        fetch(`http://localhost:5005/api/games/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setGame(data);
+                setLoading(false);
+
     return fetch(`http://localhost:5005/api/reviews/one-game/${data._id}`)
      })
-     .then(response => response.json())
-     .then(data => {
+     .then((response) => response.json())
+     .then((data) => {
          setReviews(Array.isArray(data) ? data : []);
          
      })
@@ -40,7 +41,11 @@ const GamePage = () => {
             alert("You need to log in to submit a review.");
             return;
         }
-        const newReview = { gameTitle: game.name, gameId: game._id, body: reviewText, rating: 5 };
+        const newReview = { gameTitle: game.name, 
+                            gameId: game._id, 
+                            body: reviewText, 
+                            rating: reviewRating
+                          };
 
         try {
             console.log("Token being sent:", token);
@@ -67,6 +72,7 @@ const GamePage = () => {
 
             setReviews(Array.isArray(updatedReviews) ? updatedReviews : []);
             setReviewText("");
+            setReviewRating(5);
         
 
     } catch (error) {
@@ -82,25 +88,54 @@ const GamePage = () => {
             <h1>{game.name}</h1>
             <img src={game.background_image} alt={game.name} />
             <p>{game.description ? game.description : "No description available."}</p>
+            <p><strong>Released:</strong> {game.released ? new Date(game.released).toDateString() : "TBA"}</p>
+            <p><strong>Metacritic Score:</strong> {game.metacritic || "N/A"}</p>
+            <p><strong>Playtime:</strong> {game.playtime || "Unknown"} hours</p>
+            <p><strong>Ratings Count:</strong> {game.ratings_count || 0}</p>
+            <p><strong>ESRB Rating:</strong> {game.esrb_rating?.name || "Not Rated"}</p>
 
-            <h2>Reviews</h2>
-            {reviews.length === 0 ? <p>No reviews yet. Be the first to review!</p> : (
-    <ul>
-        {reviews.map((review, index) => (
-            <li key={index}>{review.body}</li>
-        ))}
-    </ul>
-)}
+            {game.platforms && game.platforms.length > 0 && (
+                <p><strong>Platforms:</strong> {game.platforms.map(p => p.platform.name).join(", ")}</p>
+            )}
 
-            <h3>Leave a Review</h3>
+<h3>Leave a Review</h3>
             <form onSubmit={handleReviewSubmit}>
                 <textarea
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-                required
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                    required
+                    placeholder="Write your review here..."
                 />
+                
+               
+                <label>
+                    Rating: 
+                    <select value={reviewRating} onChange={(e) => setReviewRating(Number(e.target.value))}>
+                        <option value={1}>1 - Poor</option>
+                        <option value={2}>2 - Fair</option>
+                        <option value={3}>3 - Good</option>
+                        <option value={4}>4 - Very Good</option>
+                        <option value={5}>5 - Excellent</option>
+                    </select>
+                </label>
+
                 <button type="submit">Submit</button>
             </form>
+
+            
+            <h2>Reviews</h2>
+            {reviews.length === 0 ? (
+                <p>No reviews yet. Be the first to review!</p>
+            ) : (
+                <ul>
+                    {reviews.map((review, index) => (
+                        <li key={index}>
+                            <strong>{review.username || "Anonymous"}</strong>: {review.body} - 
+                            <strong> ⭐ {review.rating}/5</strong>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
