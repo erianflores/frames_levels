@@ -4,20 +4,25 @@ import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
 import GamePage from "../pages/GamePage";
 import Dashboard from "../pages/Dashboard";
-import { useEffect, useState } from "react";
+import PrivateRoute from "./PrivateRoute";
 // import ProfilePage from "../pages/ProfilePage";
 
 const AppRoutes = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState();
-  useEffect(() => {
-    setIsAuthenticated(!!localStorage.getItem("authToken"));
-  }, []);
+  //   const [isAuthenticated, setIsAuthenticated] = useState();
+  //   useEffect(() => {
+  //     setIsAuthenticated(!!localStorage.getItem("authToken"));
+  //   }, []);
 
   return (
     <Routes>
+      <Route path="/" element={<HomePage />} />
       <Route
-        path="/"
-        element={isAuthenticated ? <Dashboard /> : <HomePage />}
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        }
       />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />

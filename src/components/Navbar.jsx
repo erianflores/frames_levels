@@ -26,7 +26,7 @@ function Navbar() {
       localStorage.setItem("authToken", data.authToken);
 
       // Redirect to homepage or dashboard pagew
-      nav("/");
+      nav("/dashboard");
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
       error.response?.data?.message || "Login failed. Try again.";
@@ -35,7 +35,9 @@ function Navbar() {
 
   return (
     <nav className="style-navbar">
-      <h2>Frames & Levels</h2>
+      <h2 className="navbar-title" onClick={() => nav("/")}>
+        Frames & Levels
+      </h2>
       <form onSubmit={handleSubmit} className="navbar-form">
         <input
           type="email"
