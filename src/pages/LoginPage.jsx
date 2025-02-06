@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [errorMessage, setErrorMessage] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,30 +17,29 @@ function LoginPage() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5005/auth/login", 
+        "http://localhost:5005/auth/login",
         formData
       );
 
       console.log("Login successful", data);
 
-      
       localStorage.setItem("authToken", data.authToken);
 
-      
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
-      setErrorMessage(error.response?.data?.message || "Login failed. Try again.");
+      setErrorMessage(
+        error.response?.data?.message || "Login failed. Try again."
+      );
     }
   }
 
   return (
     <div>
       <h2>Login Page</h2>
-      
-      
+
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      
+
       <form onSubmit={handleSubmit}>
         <input
           type="email"

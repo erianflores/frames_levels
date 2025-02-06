@@ -3,8 +3,9 @@ import HomePage from "../pages/HomePage";
 import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
 import GamePage from "../pages/GamePage";
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/DashboardPage";
 import PrivateRoute from "./PrivateRoute";
+// import PrivateRoute from "./PrivateRoute";
 // import ProfilePage from "../pages/ProfilePage";
 
 const AppRoutes = () => {

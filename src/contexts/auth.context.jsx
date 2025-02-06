@@ -7,6 +7,7 @@ const AuthWrapper = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const nav = useNavigate();
   const authenticateUser = async () => {
     const theToken = localStorage.getItem("authToken");
     if (theToken) {
@@ -33,21 +34,32 @@ const AuthWrapper = ({ children }) => {
       console.log("No token present");
     }
   };
+
+  const handleLogin = (userData) => {
+    setUser(userData); // Update the user state
+    setIsLoggedIn(true); // Update logged-in state
+  };
   function handleLogout() {
     console.log("logging out");
     localStorage.removeItem("authToken");
     setUser(null);
     setIsLoggedIn(false);
+    nav("/login");
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      authenticateUser();
-    }, []);
+    authenticateUser();
   }, []);
   return (
     <AuthContext.Provider
-      value={{ user, isLoading, isLoggedIn, authenticateUser, handleLogout }}
+      value={{
+        user,
+        isLoading,
+        isLoggedIn,
+        authenticateUser,
+        handleLogout,
+        handleLogin,
+      }}
     >
       {children}
     </AuthContext.Provider>
