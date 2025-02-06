@@ -5,11 +5,18 @@ import { AuthContext } from "../contexts/auth.context";
 
 function Navbar() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { user, isLoggedIn, handleLogout } = useContext(AuthContext);
+  const { user, isLoggedIn, handleLogout, authenticateUser } =
+    useContext(AuthContext);
   const nav = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    console.log("Search Query:", e.target.value);
   };
 
   async function handleSubmit(e) {
@@ -26,6 +33,7 @@ function Navbar() {
 
       // Token saved in localStorage
       localStorage.setItem("authToken", data.authToken);
+      await authenticateUser();
 
       // Redirect to dashboard page
       nav("/dashboard");
@@ -37,42 +45,56 @@ function Navbar() {
 
   return (
     <nav className="style-navbar">
-      <h2
-        className="navbar-title"
-        onClick={() => nav(isLoggedIn ? "/dashboard" : "/")}
-      >
-        Frames & Levels
-      </h2>
-      {isLoggedIn ? (
-        <div className="navbar-user-info">
-          <span>Welcome, {user?.name}</span>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="navbar-form">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="input"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="input"
-          />
-          <button type="submit" className="button-style">
-            Login
-          </button>
-        </form>
-      )}
+      <div className="navbar-upper">
+        <h2
+          className="navbar-title"
+          onClick={() => nav(isLoggedIn ? "/dashboard" : "/")}
+        >
+          Frames & Levels
+        </h2>
+        {isLoggedIn ? (
+          <div className="navbar-user-info">
+            <span>Welcome, {user?.name}</span>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="navbar-form">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="input"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="input"
+            />
+            <button type="submit" className="login-button-style">
+              Login
+            </button>
+          </form>
+        )}
+      </div>
+      <div className="navbar-lower">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
+        <button type="submit" className="search-button-style">
+          Search
+        </button>
+      </div>
     </nav>
   );
 }

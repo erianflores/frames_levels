@@ -36,15 +36,15 @@ const AuthWrapper = ({ children }) => {
   };
 
   const handleLogin = (userData) => {
-    setUser(userData); // Update the user state
-    setIsLoggedIn(true); // Update logged-in state
+    setUser(userData);
+    setIsLoggedIn(true);
   };
   function handleLogout() {
     console.log("logging out");
     localStorage.removeItem("authToken");
     setUser(null);
     setIsLoggedIn(false);
-    nav("/login");
+    nav("/");
   }
 
   useEffect(() => {
