@@ -9,6 +9,7 @@ function Navbar() {
     useContext(AuthContext);
   const nav = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,6 +18,31 @@ function Navbar() {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     console.log("Search Query:", e.target.value);
+  };
+
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    if (!searchQuery) return;
+
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5005/api/games/search?query=${searchQuery}`
+      );
+      console.log("Search results:", data);
+      setSearchResults(data);
+    } catch (error) {
+      console.log("Search error:", error);
+    }
+
+    {
+      searchResults.length > 0 && (
+        <ul>
+          {searchResults.map((game) => (
+            <li key={game._id}>{game.name}</li>
+          ))}
+        </ul>
+      );
+    }
   };
 
   async function handleSubmit(e) {
@@ -84,16 +110,18 @@ function Navbar() {
         )}
       </div>
       <div className="navbar-lower">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className="search-input"
-        />
-        <button type="submit" className="search-button-style">
-          Search
-        </button>
+        <form onSubmit={handleSearchSubmit} className="search-form">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="search-input"
+          />
+          <button type="submit" className="search-button-style">
+            Search
+          </button>
+        </form>
       </div>
     </nav>
   );
