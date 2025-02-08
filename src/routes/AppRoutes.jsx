@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage";
 import GamePage from "../pages/GamePage";
 import Dashboard from "../pages/DashboardPage";
 import PrivateRoute from "./PrivateRoute";
+import SearchResults from "../pages/SearchResults";
 // import PrivateRoute from "./PrivateRoute";
 // import ProfilePage from "../pages/ProfilePage";
 
@@ -25,6 +26,7 @@ const AppRoutes = () => {
           </PrivateRoute>
         }
       />
+      <Route path="/search/:query" element={<SearchResults />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/games/:id" element={<GamePage />} />

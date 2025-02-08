@@ -22,7 +22,8 @@ function Navbar() {
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    if (!searchQuery) return;
+    if (!searchQuery.trim()) return;
+    nav(`/search/${searchQuery}`);
 
     try {
       const { data } = await axios.get(
