@@ -81,7 +81,7 @@ function Navbar() {
         </h2>
         {isLoggedIn ? (
           <div className="navbar-user-info">
-            <span>Welcome, {user?.name}</span>
+            <span>Welcome, {user?.username}</span>
             <button onClick={handleLogout}>Logout</button>
           </div>
         ) : (
