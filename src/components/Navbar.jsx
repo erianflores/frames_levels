@@ -70,6 +70,19 @@ function Navbar() {
     }
   }
 
+    //profile navigation
+    const handleProfileClick = () => {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        const userId = decodedToken._id;
+        nav(`/profile/${userId}`); 
+      } else {
+        nav("/login"); 
+      }
+    };
+
+
   return (
     <nav className="style-navbar">
       <div className="navbar-upper">
@@ -82,6 +95,11 @@ function Navbar() {
         {isLoggedIn ? (
           <div className="navbar-user-info">
             <span>Welcome, {user?.username}</span>
+            {/* Profile Button */}
+            {/* Profile Button */}
+            <button onClick={handleProfileClick} className="profile-btn">
+              Profile
+            </button>
             <button onClick={handleLogout}>Logout</button>
           </div>
         ) : (

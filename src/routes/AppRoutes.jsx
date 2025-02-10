@@ -2,12 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
+import ProfilePage from "../pages/ProfilePage";
 import GamePage from "../pages/GamePage";
 import Dashboard from "../pages/DashboardPage";
 import PrivateRoute from "./PrivateRoute";
 import SearchResults from "../pages/SearchResults";
 // import PrivateRoute from "./PrivateRoute";
-// import ProfilePage from "../pages/ProfilePage";
+
 
 const AppRoutes = () => {
   //   const [isAuthenticated, setIsAuthenticated] = useState();
@@ -30,7 +31,8 @@ const AppRoutes = () => {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/games/:id" element={<GamePage />} />
-      {/*<Route path="/profile" element={<ProfilePage />} /> */}
+      <Route path="/profile/:userId" element={<ProfilePage />} /> 
+      
     </Routes>
   );
 };
