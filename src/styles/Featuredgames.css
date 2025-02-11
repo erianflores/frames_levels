@@ -1,40 +1,40 @@
 #featured-games {
-    width: 100%;
-    max-width: 1200px; 
-    margin: auto; 
-    overflow: visible; 
-    position: relative;
-  }
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  overflow: visible;
+  position: relative;
+}
 
-  .game-item {
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .game-item img {
-    width: 100%; /* Ensure the image takes up the entire container width */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Ensure the image doesn't stretch */
-    border-radius: 8px; /* Optional: add rounded corners */
-  }
-  
+.game-item {
+  text-align: center;
+  padding: 10px;
+}
+
+.game-item img {
+  width: 100%; /* Ensure the image takes up the entire container width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image doesn't stretch */
+  border-radius: 8px; /* Optional: add rounded corners */
+}
+
 .slick-prev,
 .slick-next {
-  z-index: 10; 
+  z-index: 10;
   width: 50px;
   height: 50px;
 }
 
 .slick-prev {
-  left: -50px; 
+  left: -50px;
 }
 
 .slick-next {
-  right: -50px; 
+  right: -50px;
 }
 
 .slick-prev:before,
 .slick-next:before {
   font-size: 30px;
-  color: white; 
+  color: white;
 }

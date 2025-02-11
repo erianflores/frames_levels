@@ -1,4 +1,8 @@
 @import "./Navbar.css";
+@import "./SideBar.css";
+@import "./Homepage.css";
+@import "./GamePage.css";
+@import "./GameSearch.css";
 
 body,
 html {
@@ -9,4 +13,17 @@ html {
 h1 {
   margin: 20px 0;
   font-size: 36px;
+}
+
+.app-container {
+  display: flex;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 170px;
+  margin-top: 70px;
+  max-width: 1200px;
 }

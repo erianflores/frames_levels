@@ -1,12 +1,14 @@
 import { FeaturedGames } from "../components/FeaturedGames";
+import GameList from "../components/GameList";
 import { TopRatedGames } from "../components/TopRatedGames";
 
 function HomePage() {
   return (
-    <div>
+    <div className="home-page">
       <h2>Welcome to the Homepage</h2>
-      <TopRatedGames />
+      {/* <TopRatedGames /> */}
       <FeaturedGames />
+      <GameList />
     </div>
   );
 }
