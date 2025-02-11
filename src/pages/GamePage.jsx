@@ -84,9 +84,13 @@ const GamePage = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div className="game-page">
       <h1>{game.name}</h1>
-      <img src={game.background_image} alt={game.name} />
+      <img
+        className="game-page-img"
+        src={game.background_image}
+        alt={game.name}
+      />
       <p>{game.description ? game.description : "No description available."}</p>
       <p>
         <strong>Released:</strong>{" "}

@@ -6,15 +6,9 @@ import GamePage from "../pages/GamePage";
 import Dashboard from "../pages/DashboardPage";
 import PrivateRoute from "./PrivateRoute";
 import SearchResults from "../pages/SearchResults";
-// import PrivateRoute from "./PrivateRoute";
 // import ProfilePage from "../pages/ProfilePage";
 
 const AppRoutes = () => {
-  //   const [isAuthenticated, setIsAuthenticated] = useState();
-  //   useEffect(() => {
-  //     setIsAuthenticated(!!localStorage.getItem("authToken"));
-  //   }, []);
-
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />

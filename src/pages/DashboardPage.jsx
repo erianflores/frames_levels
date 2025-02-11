@@ -1,4 +1,5 @@
 import { FeaturedGames } from "../components/FeaturedGames";
+import GameList from "../components/GameList";
 import { TopRatedGames } from "../components/TopRatedGames";
 import { useNavigate } from "react-router-dom";
 
@@ -10,11 +11,12 @@ function Dashboard() {
     nav("/"); // Redirect to public homepage
   };
   return (
-    <div>
+    <div className="home-page">
       <h2>Welcome to the Dashboard</h2>
       <button onClick={handleLogout}>Logout</button>
-      <TopRatedGames />
+      {/* <TopRatedGames /> */}
       <FeaturedGames />
+      <GameList />
     </div>
   );
 }
