@@ -3,7 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../styles/ProfilePage.css"; 
 import womanImage from "../assets/woman.png";
 import manImage from "../assets/man.png";
-
+import catImage from "../assets/catgamer.png";
+import girlImage from "../assets/girl.png";
+import coolImage from "../assets/cool.png";
+import kidImage from "../assets/kid.png";
 const ProfilePage = () => {
   const { userId: userIdFromURL } = useParams();
   const navigate = useNavigate();
@@ -13,7 +16,7 @@ const ProfilePage = () => {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({ username: "", email: "", password: "", profilePic: "" });
 
-  const profilePictures = [womanImage, manImage];
+  const profilePictures = [womanImage, manImage, kidImage, catImage, coolImage, girlImage ];
 
   const fetchUserData = async () => {
     const token = localStorage.getItem("authToken");
@@ -152,8 +155,8 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-container">
-      <h1 className="profile-header">User Profile</h1>
-
+      <div className="profile-box">
+      <h1 className="profile-header">Hi, {user.username}!</h1>
       {editing ? (
         <form className="profile-form" onSubmit={handleUpdate}>
           <label>Username:</label>
@@ -175,15 +178,16 @@ const ProfilePage = () => {
                 className={`profile-pic-option ${formData.profilePic === pic ? "selected" : ""}`}
                 onClick={() => handleProfilePicSelect(pic)}
               />
+              
             ))}
           </div>
+          
 
           <button type="submit" className="save-button">Save Changes</button>
           <button type="button" onClick={() => setEditing(false)} className="cancel-button">Cancel</button>
         </form>
       ) : (
         <div className="profile-info">
-          <p><strong>Username:</strong> {user.username}</p>
           <div className="profile-picture-container">
             <img src={user.profilePic} alt="Profile" className="profile-picture" />
           </div>
@@ -192,8 +196,9 @@ const ProfilePage = () => {
           <button onClick={handleDelete} className="delete-button">Delete Account</button>
         </div>
       )}
+      </div>
 
-      <h2>User Reviews</h2>
+      <h2 className="title-review-box">{user.username}'s reviews</h2>
       <div className="reviews-container">
         {Array.isArray(reviews) && reviews.length === 0 ? (
           <p>No reviews yet</p>

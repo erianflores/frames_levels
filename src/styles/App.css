@@ -4,11 +4,14 @@
 @import "./GamePage.css";
 @import "./GameSearch.css";
 @import "./ProfilePage.css";
+@import "./Signup.css";
+@import "./LoginPage.css";
 
 body,
 html {
   height: 100%;
   margin: 0;
+  font-family: "Roboto Mono", serif;
 }
 
 h1 {

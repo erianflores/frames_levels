@@ -5,11 +5,85 @@
   }
   
   .profile-header {
-    font-size: 24px;
+    font-size: 60px;
     font-weight: bold;
     margin-bottom: 20px;
   }
+
+ /* Profile Form */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   
+}
+
+.profile-form label {
+  font-weight: bold;
+  text-align: left;
+}
+
+.profile-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.profile-form input:focus {
+  border-color: #007bff;
+  outline: none;
+
+}
+
+.profile-pic-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.profile-pic-option {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, border 0.2s;
+}
+
+.profile-pic-option:hover {
+  transform: scale(1.1);
+}
+
+.profile-pic-option.selected {
+  border: 3px solid #007bff;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profile-box {
+  background-color: white;
+  padding: 50px;
+  border: 2px solid #c8c5c5;
+  border-radius: 10px;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto 30px; 
+}
+
+.profile-info {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+  
+  /* reviews */
   .reviews-container {
    display: flex;
    flex-direction: row;
@@ -87,24 +161,14 @@
     margin-top: 20px;
     text-align: center;
   }
-  
-  .profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+  .title-review-box {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
   }
+
+ 
   
-  .profile-pic-options img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 5px;
-    cursor: pointer;
-  }
   
-  .profile-pic-option.selected {
-    border: 3px solid #4caf50;
-  }
+  
   

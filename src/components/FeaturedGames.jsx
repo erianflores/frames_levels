@@ -58,15 +58,17 @@ export const FeaturedGames = () => {
 
   return (
     <section id="featured-games">
-      <h2>Featured Games</h2>
+      
       <Slider {...settings}>
         {games.map((game) => (
           <div key={game._id} className="game-item">
+            <h2>You will love:</h2>
             <Link to={`/games/${game._id}`}>
               <img
                 src={game.background_image || "https://via.placeholder.com/200"}
                 alt={game.name}
               />
+        
               <h3>{game.name}</h3>
             </Link>
             <p>⭐ Rating: {game.rating} / 5</p>

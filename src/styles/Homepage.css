@@ -2,12 +2,66 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  justify-content: center; 
+  min-height: 100vh; 
+}
+
+.join-us-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 17%;
+  transition: background-color 0.3s ease;
+}
+
+.join-us-button:hover {
+  background-color: #0056b3;
+}
+
+.welcome-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  margin-left: 20%;
 }
 
 .game-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
   padding: 20px;
+  margin-left: 20%;
+  max-width: 1200px;
+}
+
+@media (max-width: 1200px) {
+  .game-list {
+    grid-template-columns: repeat(4, 1fr); 
+    margin-left: 0; 
+  }
+}
+
+@media (max-width: 1000px) {
+  .game-list {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+@media (max-width: 768px) {
+  .game-list {
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .game-list {
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
 }

@@ -35,12 +35,12 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <h2>Login Page</h2>
+    <div className="login-page">
+     <h2 className="login-title">Log back in?</h2>
 
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"
@@ -57,7 +57,7 @@ function LoginPage() {
           onChange={handleChange}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit"className="login-button">Log In</button>
       </form>
     </div>
   );
