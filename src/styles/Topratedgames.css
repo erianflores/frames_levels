@@ -1,10 +1,21 @@
 .top-rated-games {
+    width: 100%;
+    max-width: 900px;
+    margin-left: 40%; 
+    position: relative;
+    margin-bottom: 50px;
     text-align: center;
-    margin: 20px 0;
+    max-width: 900px; 
+    background: #969697; 
+    padding: 20px;
+    border-radius: 12px;
+    border: 3px solid #ffd013; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .games-list {
     display: flex;
+    justify-content: center;
     gap: 20px;
     overflow-x: auto;
     padding: 10px;

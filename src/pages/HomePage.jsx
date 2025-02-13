@@ -6,8 +6,8 @@ function HomePage() {
   return (
     <div className="home-page">
       <h2>Welcome to the Homepage</h2>
-      {/* <TopRatedGames /> */}
       <FeaturedGames />
+      <TopRatedGames /> 
       <GameList />
     </div>
   );
