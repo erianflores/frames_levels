@@ -1,51 +1,67 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export const FeaturedGames = () => {
-  const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+// Example of hardcoded game data
+const hardcodedGames = [
+  {
+    _id: "679e37bb4738965adff0d5db",
+    name: "The Witcher 3: Wild Hunt",
+    background_image:
+      "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
+    rating: 4.65,
+  },
+  {
+    _id: "679e37bb4738965adff0d6e2",
+    name: "Rise of the Tomb Raider",
+    background_image:
+      "https://media.rawg.io/media/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg",
+    rating: 4.04,
+  },
+  {
+    _id: "679e37bb4738965adff0d676",
+    name: "God of War (2018)",
+    background_image:
+      "https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg",
+    rating: 4.56,
+  },
+  {
+    _id: "679e37bb4738965adff0d69a",
+    name: "Cyberpunk 2077",
+    background_image:
+      "https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg",
+    rating: 4.2,
+  },
+  {
+    _id: "679e37bb4738965adff0d6ba",
+    name: "Warframe",
+    background_image:
+      "https://media.rawg.io/media/games/f87/f87457e8347484033cb34cde6101d08d.jpg",
+    rating: 3.42,
+  }
+];
 
-  useEffect(() => {
-    fetch("http://localhost:5005/api/games/featured")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch games");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setGames(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching games:", error);
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+export const FeaturedGames = () => {
+  const games = hardcodedGames; 
 
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
-    slidesToShow: 3,
+    speed: 1000,
+    slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true, 
+    autoplaySpeed: 3000, 
+    arrows: true,
   };
-
-  if (loading) return <p>Loading featured games...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <section id="featured-games">
       <h2>Featured Games</h2>
       <Slider {...settings}>
         {games.map((game) => (
-          <div key={game.id} className="game-item">
+          <div key={game._id} className="game-item">
             <Link to={`/games/${game._id}`}>
               <img
                 src={game.background_image || "https://via.placeholder.com/200"}
@@ -53,6 +69,8 @@ export const FeaturedGames = () => {
               />
               <h3>{game.name}</h3>
             </Link>
+            <p>⭐ Rating: {game.rating} / 5</p>
+            <p>{game.description}</p> 
           </div>
         ))}
       </Slider>

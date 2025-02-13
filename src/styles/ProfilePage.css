@@ -83,4 +83,28 @@
     color: white;
   }
   
+  .profile-picture-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .profile-pic-options img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .profile-pic-option.selected {
+    border: 3px solid #4caf50;
+  }
   

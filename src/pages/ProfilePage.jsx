@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/ProfilePage.css"; 
+import womanImage from "../assets/woman.png";
+import manImage from "../assets/man.png";
 
 const ProfilePage = () => {
   const { userId: userIdFromURL } = useParams();
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState({ username: "", email: "" });
+  const [user, setUser] = useState({ username: "", email: "", profilePic: "" });
   const [editing, setEditing] = useState(false);
-  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", email: "", password: "", profilePic: "" });
 
-  useEffect(() => {
+  const profilePictures = [womanImage, manImage];
+
+  const fetchUserData = async () => {
     const token = localStorage.getItem("authToken");
     if (!token) {
       setError("No authentication token found");
@@ -24,40 +28,63 @@ const ProfilePage = () => {
       const finalUserId = userIdFromURL || userIdFromToken;
 
       if (finalUserId) {
-        fetch(`http://localhost:5005/users/profile/${finalUserId}`, {
+        const reviewResponse = await fetch(`http://localhost:5005/users/profile/${finalUserId}`, {
           headers: { Authorization: `Bearer ${token}` },
-        })
-          .then((response) => response.json())
-          .then((data) => setReviews(data))
-          .catch((error) => {
-            console.error("Error fetching reviews:", error);
-            setError("Error fetching reviews");
+        });
+        const reviewData = await reviewResponse.json();
+        setReviews(reviewData);
+
+        const verifyResponse = await fetch("http://localhost:5005/users/verify", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (verifyResponse.ok) {
+          const userData = await verifyResponse.json();
+          setUser({
+            username: userData.currentUser.username,
+            email: userData.currentUser.email,
+            profilePic: userData.currentUser.profilePic || profilePictures[0],
           });
 
-        fetch("http://localhost:5005/users/verify", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setUser({ username: data.currentUser.username, email: data.currentUser.email });
-            setFormData({ username: data.currentUser.username, email: data.currentUser.email, password: "" });
-          })
-          .catch((error) => console.error("Error verifying user:", error));
+          setFormData({
+            username: userData.currentUser.username || "",
+            email: userData.currentUser.email || "",
+            password: "",
+            profilePic: userData.currentUser.profilePic || profilePictures[0],
+          });
+        }
       }
     } catch (error) {
       setError("Error decoding token");
     }
-  }, [userIdFromURL]);
+  };
 
- 
+  useEffect(() => {
+    fetchUserData();
+  }, [userIdFromURL, editing]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+    
+  const handleProfilePicSelect = (pic) => {
+    setFormData({ ...formData, profilePic: pic });
+    console.log("selected profile picture", pic);
+  };
 
-  
   const handleUpdate = async (e) => {
     e.preventDefault();
+    console.log("Form submitted for update!");
+    
     const token = localStorage.getItem("authToken");
+
+    const updatedData = {};
+    if (formData.username !== user.username) updatedData.username = formData.username;
+    if (formData.email !== user.email && formData.email.trim() !== "") updatedData.email = formData.email;
+    if (formData.password.trim() !== "") updatedData.password = formData.password;
+    if (formData.profilePic !== user.profilePic) updatedData.profilePic = formData.profilePic;
+
+    console.log("Sending update request with:", updatedData);
 
     try {
       const response = await fetch("http://localhost:5005/users/update", {
@@ -66,15 +93,28 @@ const ProfilePage = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedData),
       });
 
       const data = await response.json();
       if (response.ok) {
         alert("Profile updated successfully!");
-        setUser({ username: data.user.username, email: data.user.email });
+        setUser({ 
+          username: data.user.username, 
+          email: data.user.email, 
+          profilePic: data.user.profilePic 
+       });
+
+       setFormData({
+          username: data.user.username,
+          email: data.user.email,
+          password: "",
+          profilePic: data.user.profilePic,
+       });
+
         setEditing(false);
-        fetchUserData();  
+
+       await fetchUserData();  
       } else {
         alert(data.message || "Error updating profile.");
       }
@@ -83,7 +123,6 @@ const ProfilePage = () => {
     }
   };
 
- 
   const handleDelete = async () => {
     const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
 
@@ -121,10 +160,23 @@ const ProfilePage = () => {
           <input type="text" name="username" value={formData.username} onChange={handleChange} required />
 
           <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Leave blank to keep current email" />
 
           <label>New Password:</label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Leave blank to keep current password" />
+
+          <label>Profile Picture:</label>
+          <div className="profile-pic-options">
+            {profilePictures.map((pic, index) => (
+              <img
+                key={index}
+                src={pic}
+                alt={`Profile option ${index + 1}`}
+                className={`profile-pic-option ${formData.profilePic === pic ? "selected" : ""}`}
+                onClick={() => handleProfilePicSelect(pic)}
+              />
+            ))}
+          </div>
 
           <button type="submit" className="save-button">Save Changes</button>
           <button type="button" onClick={() => setEditing(false)} className="cancel-button">Cancel</button>
@@ -132,6 +184,9 @@ const ProfilePage = () => {
       ) : (
         <div className="profile-info">
           <p><strong>Username:</strong> {user.username}</p>
+          <div className="profile-picture-container">
+            <img src={user.profilePic} alt="Profile" className="profile-picture" />
+          </div>
 
           <button onClick={() => setEditing(true)} className="edit-button">Edit Profile</button>
           <button onClick={handleDelete} className="delete-button">Delete Account</button>
@@ -152,7 +207,7 @@ const ProfilePage = () => {
             </div>
           ))
         )}
-    </div>
+      </div>
     </div>
   );
 };
