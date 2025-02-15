@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/ProfilePage.css"; 
 import womanImage from "../assets/woman.png";
@@ -7,6 +7,7 @@ import catImage from "../assets/catgamer.png";
 import girlImage from "../assets/girl.png";
 import coolImage from "../assets/cool.png";
 import kidImage from "../assets/kid.png";
+import { UserContext } from "../contexts/user.context";
 const ProfilePage = () => {
   const { userId: userIdFromURL } = useParams();
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const ProfilePage = () => {
   const [user, setUser] = useState({ username: "", email: "", profilePic: "" });
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({ username: "", email: "", password: "", profilePic: "" });
-
+  const {setUser: setContextUser} = useContext(UserContext)
   const profilePictures = [womanImage, manImage, kidImage, catImage, coolImage, girlImage ];
 
   const fetchUserData = async () => {
@@ -107,6 +108,12 @@ const ProfilePage = () => {
           email: data.user.email, 
           profilePic: data.user.profilePic 
        });
+
+       setContextUser({ 
+        username: data.user.username, 
+        email: data.user.email, 
+        profilePic: data.user.profilePic 
+     });
 
        setFormData({
           username: data.user.username,
