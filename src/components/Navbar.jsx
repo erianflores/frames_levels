@@ -11,6 +11,11 @@ function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchUserData();
+    }
+  }, [isLoggedIn]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
