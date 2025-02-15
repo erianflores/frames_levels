@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const GamePage = () => {
+const GamePage = (userId) => {
   const { id } = useParams();
   const [game, setGame] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -9,8 +10,11 @@ const GamePage = () => {
   const [error, setError] = useState(null);
   const [reviewText, setReviewText] = useState("");
   const [reviewRating, setReviewRating] = useState(5);
+  const [owned, setOwned] = useState(false);
+  const [wishlist, setWishlist] = useState(false);
+
   useEffect(() => {
-    fetch(`http://localhost:5005/api/games/${id}`)
+    fetch(`http://localhost:5005/api/games/one-game/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setGame(data);
@@ -28,6 +32,16 @@ const GamePage = () => {
         setLoading(false);
       });
   }, [id]);
+
+  const handleAddToOwned = async () => {
+    try {
+      await axios.post(`/user/${userId}/owned`, { gameId: game._id });
+      setOwned(true);
+      console.error("Invalid userId:", userId);
+    } catch (error) {
+      console.log("Error adding to owned list", error);
+    }
+  };
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
@@ -92,6 +106,13 @@ const GamePage = () => {
         alt={game.name}
       />
       <p>{game.description ? game.description : "No description available."}</p>
+
+      <div className="game-favorites">
+        <button onClick={handleAddToOwned} disabled={owned}>
+          I Owned This
+        </button>
+        {/* <button onClick={handleAddToWishlist} disabled={wishlist}>I Want This</button> */}
+      </div>
       <p>
         <strong>Released:</strong>{" "}
         {game.released ? new Date(game.released).toDateString() : "TBA"}
