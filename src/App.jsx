@@ -3,6 +3,7 @@ import AppRoutes from "./routes/AppRoutes";
 import "./styles/Featuredgames.css";
 import Sidebar from "./components/Sidebar";
 import { GameProvider } from "./contexts/game.context";
+
 import "./styles/App.css";
 
 function App() {

@@ -13,9 +13,9 @@ function Navbar() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetchUserData();
+      authenticateUser();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, authenticateUser]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
