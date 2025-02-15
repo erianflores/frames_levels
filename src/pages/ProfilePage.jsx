@@ -7,7 +7,8 @@ import catImage from "../assets/catgamer.png";
 import girlImage from "../assets/girl.png";
 import coolImage from "../assets/cool.png";
 import kidImage from "../assets/kid.png";
-import { UserContext } from "../contexts/user.context";
+import { AuthContext } from "../contexts/auth.context";
+
 const ProfilePage = () => {
   const { userId: userIdFromURL } = useParams();
   const navigate = useNavigate();
@@ -16,7 +17,8 @@ const ProfilePage = () => {
   const [user, setUser] = useState({ username: "", email: "", profilePic: "" });
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({ username: "", email: "", password: "", profilePic: "" });
-  const {setUser: setContextUser} = useContext(UserContext)
+  const { setUser: setContextUser } = useContext(AuthContext);
+  
   const profilePictures = [womanImage, manImage, kidImage, catImage, coolImage, girlImage ];
 
   const fetchUserData = async () => {

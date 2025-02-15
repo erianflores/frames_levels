@@ -2,20 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
-import { UserContext } from "../contexts/user.context";
+
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const { authenticateUser, isLoggedIn } = useContext(AuthContext);
-  const { user: userData, fetchUserData } = useContext(UserContext);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      fetchUserData();
-    }
-  }, [isLoggedIn]);
+  const { authenticateUser } = useContext(AuthContext);
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,7 +29,7 @@ function LoginPage() {
 
       localStorage.setItem("authToken", data.authToken);
       await authenticateUser();
-      await fetchUserData();
+  
 
       navigate("/dashboard");
     } catch (error) {

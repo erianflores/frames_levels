@@ -2,22 +2,20 @@ import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
-import { UserContext } from "../contexts/user.context";
 
 function Navbar() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { isLoggedIn, handleLogout, authenticateUser } =
+  const {user, isLoggedIn, handleLogout, authenticateUser } =
     useContext(AuthContext);
-  const { user: userData, fetchUserData } = useContext(UserContext);
   const nav = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetchUserData();
+      authenticateUser();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, authenticateUser]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -69,7 +67,7 @@ function Navbar() {
       // Token saved in localStorage
       localStorage.setItem("authToken", data.authToken);
       await authenticateUser();
-      await fetchUserData();
+   
 
       // Redirect to dashboard page
       nav("/dashboard");
@@ -79,17 +77,15 @@ function Navbar() {
     }
   }
 
-  //profile navigation
-  const handleProfileClick = () => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      const decodedToken = JSON.parse(atob(token.split(".")[1]));
-      const userId = decodedToken._id;
-      nav(`/profile/${userId}`);
-    } else {
-      nav("/login");
-    }
-  };
+    //profile navigation
+    const handleProfileClick = () => {
+      if (user?._id) {
+        nav(`/profile/${user._id}`);
+      } else {
+        nav("/login");
+      }
+    };
+
 
   return (
     <nav className="style-navbar">
@@ -102,8 +98,7 @@ function Navbar() {
         </h2>
         {isLoggedIn ? (
           <div className="navbar-user-info">
-            <span>Welcome, {userData?.username}</span>
-            {/* Profile Button */}
+            <span>Welcome, {user?.username}</span>
             {/* Profile Button */}
             <button onClick={handleProfileClick} className="profile-btn">
               Profile
