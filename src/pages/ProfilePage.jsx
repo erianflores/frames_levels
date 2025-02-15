@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../styles/ProfilePage.css"; 
 import womanImage from "../assets/woman.png";
 import manImage from "../assets/man.png";
 import catImage from "../assets/catgamer.png";

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../styles/TopRatedGames.css";
 
 export function TopRatedGames() {
   const [topGames, setTopGames] = useState([]);
