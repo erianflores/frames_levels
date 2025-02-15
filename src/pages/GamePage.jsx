@@ -34,12 +34,15 @@ const GamePage = (userId) => {
   }, [id]);
 
   const handleAddToOwned = async () => {
+    console.log("userId:", userId, typeof userId);
+
     try {
       await axios.post(`/user/${userId}/owned`, { gameId: game._id });
       setOwned(true);
       console.error("Invalid userId:", userId);
     } catch (error) {
       console.log("Error adding to owned list", error);
+      console.log("Invalid user:", userId);
     }
   };
 

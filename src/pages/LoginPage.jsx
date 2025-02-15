@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/auth.context";
+import { UserContext } from "../contexts/user.context";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { authenticateUser, isLoggedIn } = useContext(AuthContext);
+  const { user: userData, fetchUserData } = useContext(UserContext);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchUserData();
+    }
+  }, [isLoggedIn]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,8 +34,10 @@ function LoginPage() {
       console.log("Login successful", data);
 
       localStorage.setItem("authToken", data.authToken);
+      await authenticateUser();
+      await fetchUserData();
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
       setErrorMessage(
@@ -36,7 +48,7 @@ function LoginPage() {
 
   return (
     <div className="login-page">
-     <h2 className="login-title">Log back in?</h2>
+      <h2 className="login-title">Log back in?</h2>
 
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
@@ -57,7 +69,9 @@ function LoginPage() {
           onChange={handleChange}
           required
         />
-        <button type="submit"className="login-button">Log In</button>
+        <button type="submit" className="login-button">
+          Log In
+        </button>
       </form>
     </div>
   );

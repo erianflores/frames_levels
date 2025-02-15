@@ -15,7 +15,7 @@ function Navbar() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      fetchUserData(); 
+      fetchUserData();
     }
   }, [isLoggedIn]);
 
@@ -79,18 +79,17 @@ function Navbar() {
     }
   }
 
-    //profile navigation
-    const handleProfileClick = () => {
-      const token = localStorage.getItem("authToken");
-      if (token) {
-        const decodedToken = JSON.parse(atob(token.split(".")[1]));
-        const userId = decodedToken._id;
-        nav(`/profile/${userId}`); 
-      } else {
-        nav("/login"); 
-      }
-    };
-
+  //profile navigation
+  const handleProfileClick = () => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      const userId = decodedToken._id;
+      nav(`/profile/${userId}`);
+    } else {
+      nav("/login");
+    }
+  };
 
   return (
     <nav className="style-navbar">
