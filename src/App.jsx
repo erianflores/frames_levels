@@ -3,13 +3,12 @@ import AppRoutes from "./routes/AppRoutes";
 import "./styles/Featuredgames.css";
 import Sidebar from "./components/Sidebar";
 import { GameProvider } from "./contexts/game.context";
-import { UserProvider } from "./contexts/user.context";
 import "./styles/App.css";
 
 function App() {
   return (
     <div className="app-container">
-       <UserProvider>
+       
       <GameProvider>
         <Navbar />
         <Sidebar />
@@ -17,7 +16,7 @@ function App() {
           <AppRoutes />
         </main>
       </GameProvider>
-      </UserProvider>
+      
     </div>
   );
 }
