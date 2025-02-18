@@ -16,10 +16,22 @@ const ProfilePage = () => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState({ username: "", email: "", profilePic: "" });
   const [editing, setEditing] = useState(false);
-  const [formData, setFormData] = useState({ username: "", email: "", password: "", profilePic: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    profilePic: "",
+  });
   const { setUser: setContextUser } = useContext(AuthContext);
-  
-  const profilePictures = [womanImage, manImage, kidImage, catImage, coolImage, girlImage ];
+
+  const profilePictures = [
+    womanImage,
+    manImage,
+    kidImage,
+    catImage,
+    coolImage,
+    girlImage,
+  ];
 
   const fetchUserData = async () => {
     const token = localStorage.getItem("authToken");
@@ -34,9 +46,12 @@ const ProfilePage = () => {
       const finalUserId = userIdFromURL || userIdFromToken;
 
       if (finalUserId) {
-        const reviewResponse = await fetch(`${API_URL}/users/profile/${finalUserId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const reviewResponse = await fetch(
+          `${API_URL}/users/profile/${finalUserId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         const reviewData = await reviewResponse.json();
         setReviews(reviewData);
 
@@ -72,7 +87,7 @@ const ProfilePage = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-    
+
   const handleProfilePicSelect = (pic) => {
     setFormData({ ...formData, profilePic: pic });
     console.log("selected profile picture", pic);
@@ -81,14 +96,18 @@ const ProfilePage = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     console.log("Form submitted for update!");
-    
+
     const token = localStorage.getItem("authToken");
 
     const updatedData = {};
-    if (formData.username !== user.username) updatedData.username = formData.username;
-    if (formData.email !== user.email && formData.email.trim() !== "") updatedData.email = formData.email;
-    if (formData.password.trim() !== "") updatedData.password = formData.password;
-    if (formData.profilePic !== user.profilePic) updatedData.profilePic = formData.profilePic;
+    if (formData.username !== user.username)
+      updatedData.username = formData.username;
+    if (formData.email !== user.email && formData.email.trim() !== "")
+      updatedData.email = formData.email;
+    if (formData.password.trim() !== "")
+      updatedData.password = formData.password;
+    if (formData.profilePic !== user.profilePic)
+      updatedData.profilePic = formData.profilePic;
 
     console.log("Sending update request with:", updatedData);
 
@@ -105,28 +124,28 @@ const ProfilePage = () => {
       const data = await response.json();
       if (response.ok) {
         alert("Profile updated successfully!");
-        setUser({ 
-          username: data.user.username, 
-          email: data.user.email, 
-          profilePic: data.user.profilePic 
-       });
+        setUser({
+          username: data.user.username,
+          email: data.user.email,
+          profilePic: data.user.profilePic,
+        });
 
-       setContextUser({ 
-        username: data.user.username, 
-        email: data.user.email, 
-        profilePic: data.user.profilePic 
-     });
+        setContextUser({
+          username: data.user.username,
+          email: data.user.email,
+          profilePic: data.user.profilePic,
+        });
 
-       setFormData({
+        setFormData({
           username: data.user.username,
           email: data.user.email,
           password: "",
           profilePic: data.user.profilePic,
-       });
+        });
 
         setEditing(false);
 
-       await fetchUserData();  
+        await fetchUserData();
       } else {
         alert(data.message || "Error updating profile.");
       }
@@ -136,13 +155,15 @@ const ProfilePage = () => {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete your account? This action is irreversible.");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account? This action is irreversible."
+    );
 
     if (confirmDelete) {
       const token = localStorage.getItem("authToken");
 
       try {
-        const response = await fetch("http://localhost:5005/users/delete", {
+        const response = await fetch(`${API_URL}/users/delete`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -165,46 +186,80 @@ const ProfilePage = () => {
   return (
     <div className="profile-container">
       <div className="profile-box">
-      <h1 className="profile-header">Hi, {user.username}!</h1>
-      {editing ? (
-        <form className="profile-form" onSubmit={handleUpdate}>
-          <label>Username:</label>
-          <input type="text" name="username" value={formData.username} onChange={handleChange} required />
+        <h1 className="profile-header">Hi, {user.username}!</h1>
+        {editing ? (
+          <form className="profile-form" onSubmit={handleUpdate}>
+            <label>Username:</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
 
-          <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Leave blank to keep current email" />
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Leave blank to keep current email"
+            />
 
-          <label>New Password:</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Leave blank to keep current password" />
+            <label>New Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Leave blank to keep current password"
+            />
 
-          <label>Profile Picture:</label>
-          <div className="profile-pic-options">
-            {profilePictures.map((pic, index) => (
+            <label>Profile Picture:</label>
+            <div className="profile-pic-options">
+              {profilePictures.map((pic, index) => (
+                <img
+                  key={index}
+                  src={pic}
+                  alt={`Profile option ${index + 1}`}
+                  className={`profile-pic-option ${
+                    formData.profilePic === pic ? "selected" : ""
+                  }`}
+                  onClick={() => handleProfilePicSelect(pic)}
+                />
+              ))}
+            </div>
+
+            <button type="submit" className="save-button">
+              Save Changes
+            </button>
+            <button
+              type="button"
+              onClick={() => setEditing(false)}
+              className="cancel-button"
+            >
+              Cancel
+            </button>
+          </form>
+        ) : (
+          <div className="profile-info">
+            <div className="profile-picture-container">
               <img
-                key={index}
-                src={pic}
-                alt={`Profile option ${index + 1}`}
-                className={`profile-pic-option ${formData.profilePic === pic ? "selected" : ""}`}
-                onClick={() => handleProfilePicSelect(pic)}
+                src={user.profilePic}
+                alt="Profile"
+                className="profile-picture"
               />
-              
-            ))}
-          </div>
-          
+            </div>
 
-          <button type="submit" className="save-button">Save Changes</button>
-          <button type="button" onClick={() => setEditing(false)} className="cancel-button">Cancel</button>
-        </form>
-      ) : (
-        <div className="profile-info">
-          <div className="profile-picture-container">
-            <img src={user.profilePic} alt="Profile" className="profile-picture" />
+            <button onClick={() => setEditing(true)} className="edit-button">
+              Edit Profile
+            </button>
+            <button onClick={handleDelete} className="delete-button">
+              Delete Account
+            </button>
           </div>
-
-          <button onClick={() => setEditing(true)} className="edit-button">Edit Profile</button>
-          <button onClick={handleDelete} className="delete-button">Delete Account</button>
-        </div>
-      )}
+        )}
       </div>
 
       <h2 className="title-review-box">{user.username}'s reviews</h2>
