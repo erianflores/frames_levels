@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../contexts/auth.context";
 
-const GamePage = (userId) => {
+const GamePage = () => {
   const { id } = useParams();
+  const { user } = useContext(AuthContext);
   const [game, setGame] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,16 +35,22 @@ const GamePage = (userId) => {
       });
   }, [id]);
 
-  const handleAddToOwned = async () => {
-    console.log("userId:", userId, typeof userId);
+  const handleAddToOwned = async (gameId) => {
+    console.log("Current user:", user);
+    if (!user || !user._id) {
+      console.error("Invalid user:", user);
+      return;
+    }
 
     try {
-      await axios.post(`/user/${userId}/owned`, { gameId: game._id });
+      const response = await axios.post(
+        `http://localhost:5005/users/${user._id}/owned`,
+        { gameId }
+      );
+      console.log("Game added to owned list:", response.data);
       setOwned(true);
-      console.error("Invalid userId:", userId);
     } catch (error) {
-      console.log("Error adding to owned list", error);
-      console.log("Invalid user:", userId);
+      console.error("Error adding to owned list", error);
     }
   };
 
@@ -111,8 +119,8 @@ const GamePage = (userId) => {
       <p>{game.description ? game.description : "No description available."}</p>
 
       <div className="game-favorites">
-        <button onClick={handleAddToOwned} disabled={owned}>
-          I Owned This
+        <button onClick={() => handleAddToOwned(game._id)} disabled={owned}>
+          {owned ? "Owned" : "I Owned This"}
         </button>
         {/* <button onClick={handleAddToWishlist} disabled={wishlist}>I Want This</button> */}
       </div>
