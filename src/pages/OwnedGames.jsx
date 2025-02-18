@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import GameCard from "../components/GameCard"; // Adjust path if needed
+import GameCard from "../components/GameCard";
 import { AuthContext } from "../contexts/auth.context";
+import axios from "axios";
+import { API_URL } from "../config/config";
 
 const OwnedGames = () => {
   const { id } = useParams();
@@ -15,12 +17,14 @@ const OwnedGames = () => {
 
     const fetchOwnedGames = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/users/${user._id}/owned`
-        );
-        if (!response.ok) throw new Error("Failed to fetch owned games");
-        const data = await response.json();
-        setOwnedGames(data);
+        const { data } = await axios.get(`${API_URL}/users/${user._id}/owned`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json", // This line helps with CORS
+          },
+        });
+
+        setOwnedGames(data); // Directly set data from the response
       } catch (err) {
         setError(err.message);
       } finally {
