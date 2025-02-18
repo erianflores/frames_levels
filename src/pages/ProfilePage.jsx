@@ -7,6 +7,7 @@ import girlImage from "../assets/girl.png";
 import coolImage from "../assets/cool.png";
 import kidImage from "../assets/kid.png";
 import { AuthContext } from "../contexts/auth.context";
+import { API_URL } from "../config/config";
 
 const ProfilePage = () => {
   const { userId: userIdFromURL } = useParams();
@@ -33,13 +34,13 @@ const ProfilePage = () => {
       const finalUserId = userIdFromURL || userIdFromToken;
 
       if (finalUserId) {
-        const reviewResponse = await fetch(`http://localhost:5005/users/profile/${finalUserId}`, {
+        const reviewResponse = await fetch(`${API_URL}/users/profile/${finalUserId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const reviewData = await reviewResponse.json();
         setReviews(reviewData);
 
-        const verifyResponse = await fetch("http://localhost:5005/users/verify", {
+        const verifyResponse = await fetch(`${API_URL}/users/verify`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -92,7 +93,7 @@ const ProfilePage = () => {
     console.log("Sending update request with:", updatedData);
 
     try {
-      const response = await fetch("http://localhost:5005/users/update", {
+      const response = await fetch(`${API_URL}/users/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
