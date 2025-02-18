@@ -59,7 +59,13 @@ function Navbar() {
     try {
       const { data } = await axios.post(
         "http://localhost:5005/auth/login", // Backend login route
-        formData
+        formData,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json", // This line helps with CORS
+          },
+        }
       );
 
       console.log("Login successful", data);
@@ -99,6 +105,14 @@ function Navbar() {
         {isLoggedIn ? (
           <div className="navbar-user-info">
             <span>Welcome, {user?.username}</span>
+
+        {user?.profilePicture && (
+        <img
+        src={user.profilePicture}
+        alt={`${user.username}'s profile`}
+        className="profile-image"
+       />
+      )}
             {/* Profile Button */}
             <button onClick={handleProfileClick} className="profile-btn">
               Profile

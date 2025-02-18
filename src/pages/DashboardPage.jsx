@@ -14,7 +14,7 @@ function Dashboard() {
   //};
   return (
     <div className="home-page">
-      <h2 className="welcome-message">Welcome to the Dashboard</h2>
+  
       {/*<button onClick={handleLogout}>Logout</button>*/}
       
       <FeaturedGames />
