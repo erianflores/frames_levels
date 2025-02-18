@@ -31,5 +31,5 @@ h1 {
   align-items: center;
   margin-left: 170px;
   margin-top: 70px;
-  max-width: 1200px;
+  min-width: 1200px;
 }

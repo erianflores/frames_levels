@@ -84,11 +84,34 @@ function Navbar() {
   }
 
     //profile navigation
-    const handleProfileClick = () => {
+    const handleProfileClick = async () => {
       if (user?._id) {
         nav(`/profile/${user._id}`);
       } else {
-        nav("/login");
+        const token = localStorage.getItem("authToken");
+          if (!token) {
+            setError("No authentication token found");
+            nav("/login");
+            return;
+          }
+          try {
+            const decodedToken = JSON.parse(atob(token.split(".")[1]));
+            const userIdFromToken = decodedToken._id;
+            const finalUserId = userIdFromToken;
+      
+            if (finalUserId) {
+              const verifyResponse = await fetch("http://localhost:5005/users/verify", {
+                headers: { Authorization: `Bearer ${token}` },
+              });
+      
+              if (verifyResponse.ok) {
+                nav(`/profile/${finalUserId}`);
+              } 
+              
+            }
+          } catch (error) {
+            console.error("Error decoding token");
+          }
       }
     };
 

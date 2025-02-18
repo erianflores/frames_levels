@@ -5,9 +5,13 @@
   padding-top: 5px;
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
   z-index: 100;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
 }
 
 .navbar-upper {
@@ -36,11 +40,11 @@
 .navbar-title {
   cursor: pointer;
   pointer-events: auto;
-  z-index: 10; /* Ensure it's above other elements */
+  z-index: 10; 
 }
 
 .profile-btn, .navbar-user-info button {
-  background-color: #0b4786; /* Deep blue */
+  background-color: #0b4786; 
   color: white;
   border: none;
   padding: 6px 12px;
@@ -51,11 +55,11 @@
 }
 
 .profile-btn:hover, .navbar-user-info button:hover {
-  background-color: #083366; /* Darker blue on hover */
+  background-color: #083366; 
 }
 
 .search-button-style {
-  background-color: #0b4786; /* Matching deep blue */
+  background-color: #0b4786; 
   color: white;
   border: none;
   padding: 6px 12px;
@@ -66,6 +70,6 @@
 }
 
 .search-button-style:hover {
-  background-color: #083366; /* Darker blue on hover */
-  transform: scale(1.05); /* Slightly enlarges the button */
+  background-color: #083366; 
+  transform: scale(1.05); 
 }
