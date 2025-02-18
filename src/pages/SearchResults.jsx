@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import GameCard from "../components/GameCard";
+import { API_URL } from "../config/config";
 
 function SearchResults() {
   const { query } = useParams();
@@ -12,7 +13,7 @@ function SearchResults() {
     const fetchResults = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5005/api/games/search?query=${query}`
+          `${API_URL}/api/games/search?query=${query}`
         );
         setSearchResults(data);
       } catch (error) {

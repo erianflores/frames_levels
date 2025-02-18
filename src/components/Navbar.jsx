@@ -2,10 +2,11 @@ import { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
+import { API_URL } from "../config/config";
 
 function Navbar() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const {user, isLoggedIn, handleLogout, authenticateUser } =
+  const { user, isLoggedIn, handleLogout, authenticateUser } =
     useContext(AuthContext);
   const nav = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,7 +34,7 @@ function Navbar() {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:5005/api/games/search?query=${searchQuery}`
+        `${API_URL}/api/games/search?query=${searchQuery}`
       );
       console.log("Search results:", data);
       setSearchResults(data);
@@ -58,7 +59,7 @@ function Navbar() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5005/auth/login", // Backend login route
+        `${API_URL}/auth/login`, // Backend login route
         formData,
         {
           headers: {
@@ -73,7 +74,6 @@ function Navbar() {
       // Token saved in localStorage
       localStorage.setItem("authToken", data.authToken);
       await authenticateUser();
-   
 
       // Redirect to dashboard page
       nav("/dashboard");
@@ -83,38 +83,36 @@ function Navbar() {
     }
   }
 
-    //profile navigation
-    const handleProfileClick = async () => {
-      if (user?._id) {
-        nav(`/profile/${user._id}`);
-      } else {
-        const token = localStorage.getItem("authToken");
-          if (!token) {
-            setError("No authentication token found");
-            nav("/login");
-            return;
-          }
-          try {
-            const decodedToken = JSON.parse(atob(token.split(".")[1]));
-            const userIdFromToken = decodedToken._id;
-            const finalUserId = userIdFromToken;
-      
-            if (finalUserId) {
-              const verifyResponse = await fetch("http://localhost:5005/users/verify", {
-                headers: { Authorization: `Bearer ${token}` },
-              });
-      
-              if (verifyResponse.ok) {
-                nav(`/profile/${finalUserId}`);
-              } 
-              
-            }
-          } catch (error) {
-            console.error("Error decoding token");
-          }
+  //profile navigation
+  const handleProfileClick = async () => {
+    if (user?._id) {
+      nav(`/profile/${user._id}`);
+    } else {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        setError("No authentication token found");
+        nav("/login");
+        return;
       }
-    };
+      try {
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));
+        const userIdFromToken = decodedToken._id;
+        const finalUserId = userIdFromToken;
 
+        if (finalUserId) {
+          const verifyResponse = await fetch(`${API_URL}/users/verify`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          if (verifyResponse.ok) {
+            nav(`/profile/${finalUserId}`);
+          }
+        }
+      } catch (error) {
+        console.error("Error decoding token");
+      }
+    }
+  };
 
   return (
     <nav className="style-navbar">
@@ -129,13 +127,13 @@ function Navbar() {
           <div className="navbar-user-info">
             <span>Welcome, {user?.username}</span>
 
-        {user?.profilePicture && (
-        <img
-        src={user.profilePicture}
-        alt={`${user.username}'s profile`}
-        className="profile-image"
-       />
-      )}
+            {user?.profilePicture && (
+              <img
+                src={user.profilePicture}
+                alt={`${user.username}'s profile`}
+                className="profile-image"
+              />
+            )}
             {/* Profile Button */}
             <button onClick={handleProfileClick} className="profile-btn">
               Profile

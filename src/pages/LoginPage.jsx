@@ -2,14 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
-
+import { API_URL } from "../config/config";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { authenticateUser } = useContext(AuthContext);
-  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,16 +19,12 @@ function LoginPage() {
     console.log("Login Data:", formData);
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5005/auth/login",
-        formData
-      );
+      const { data } = await axios.post(`${API_URL}/auth/login`, formData);
 
       console.log("Login successful", data);
 
       localStorage.setItem("authToken", data.authToken);
       await authenticateUser();
-  
 
       navigate("/dashboard");
     } catch (error) {

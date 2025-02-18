@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config/config";
 
 const GameContext = createContext();
 
@@ -14,7 +15,7 @@ function GameProvider({ children }) {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `http://localhost:5005/api/games/newest?page=${pageNumber}&page_size=20`
+        `${API_URL}/api/games/newest?page=${pageNumber}&page_size=20`
       );
 
       setGames((prevGames) => (append ? [...prevGames, ...data] : data));

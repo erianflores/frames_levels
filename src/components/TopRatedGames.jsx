@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config/config";
 
 export function TopRatedGames() {
   const [topGames, setTopGames] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5005/api/games/top-games")
+    fetch(`${API_URL}/api/games/top-games`)
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {

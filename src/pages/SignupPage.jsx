@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/config";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -17,10 +18,7 @@ const SignupPage = () => {
       password,
     };
     try {
-      const { data } = await axios.post(
-        "http://localhost:5005/auth/signup",
-        userToCreate
-      );
+      const { data } = await axios.post(`${API_URL}/auth/signup`, userToCreate);
       console.log("successful signup", data);
       nav("/login");
     } catch (error) {
@@ -30,9 +28,8 @@ const SignupPage = () => {
 
   return (
     <div className="signup-page">
-      
       <form className="signup-form" onSubmit={handleSignup}>
-      <h3 className="signup-title">Signup Page</h3>
+        <h3 className="signup-title">Signup Page</h3>
         <label className="input-label">Username:</label>
         <input
           className="input-field"
@@ -54,7 +51,9 @@ const SignupPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="signup-button" type="submit">Signup</button>
+        <button className="signup-button" type="submit">
+          Signup
+        </button>
       </form>
     </div>
   );

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/config";
 
 const AuthContext = createContext();
 const AuthWrapper = ({ children }) => {
@@ -19,10 +20,9 @@ const AuthWrapper = ({ children }) => {
     }
 
     try {
-      const responseToVerify = await axios.get(
-        "http://localhost:5005/auth/verify",
-        { headers: { authorization: `Bearer ${theToken}` } }
-      );
+      const responseToVerify = await axios.get(`${API_URL}/auth/verify`, {
+        headers: { authorization: `Bearer ${theToken}` },
+      });
 
       console.log("Token is valid", responseToVerify);
 
