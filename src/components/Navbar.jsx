@@ -59,7 +59,13 @@ function Navbar() {
     try {
       const { data } = await axios.post(
         "http://localhost:5005/auth/login", // Backend login route
-        formData
+        formData,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json", // This line helps with CORS
+          },
+        }
       );
 
       console.log("Login successful", data);
@@ -78,11 +84,34 @@ function Navbar() {
   }
 
     //profile navigation
-    const handleProfileClick = () => {
+    const handleProfileClick = async () => {
       if (user?._id) {
         nav(`/profile/${user._id}`);
       } else {
-        nav("/login");
+        const token = localStorage.getItem("authToken");
+          if (!token) {
+            setError("No authentication token found");
+            nav("/login");
+            return;
+          }
+          try {
+            const decodedToken = JSON.parse(atob(token.split(".")[1]));
+            const userIdFromToken = decodedToken._id;
+            const finalUserId = userIdFromToken;
+      
+            if (finalUserId) {
+              const verifyResponse = await fetch("http://localhost:5005/users/verify", {
+                headers: { Authorization: `Bearer ${token}` },
+              });
+      
+              if (verifyResponse.ok) {
+                nav(`/profile/${finalUserId}`);
+              } 
+              
+            }
+          } catch (error) {
+            console.error("Error decoding token");
+          }
       }
     };
 
@@ -99,6 +128,14 @@ function Navbar() {
         {isLoggedIn ? (
           <div className="navbar-user-info">
             <span>Welcome, {user?.username}</span>
+
+        {user?.profilePicture && (
+        <img
+        src={user.profilePicture}
+        alt={`${user.username}'s profile`}
+        className="profile-image"
+       />
+      )}
             {/* Profile Button */}
             <button onClick={handleProfileClick} className="profile-btn">
               Profile

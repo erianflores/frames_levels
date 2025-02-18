@@ -61,15 +61,21 @@ export const FeaturedGames = () => {
       <Slider {...settings}>
         {games.map((game) => (
           <div key={game._id} className="game-item">
-            <Link to={`/games/${game._id}`}>
-              <img
-                src={game.background_image || "https://via.placeholder.com/200"}
-                alt={game.name}
-              />
-
-              <h3>{game.name}</h3>
+            <h2>You will love:</h2>
+            <Link to={`/games/${game._id}`} className="game-link">
+              <div className="image-wrapper">
+                <img
+                  src={
+                    game.background_image || "https://via.placeholder.com/200"
+                  }
+                  alt={game.name}
+                />
+                <div className="overlay">
+                  <h3>{game.name}</h3>
+                  <p>⭐ Rating: {game.rating} / 5</p>
+                </div>
+              </div>
             </Link>
-            <p>⭐ Rating: {game.rating} / 5</p>
             <p>{game.description}</p>
           </div>
         ))}
