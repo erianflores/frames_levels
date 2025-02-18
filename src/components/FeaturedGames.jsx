@@ -6,35 +6,49 @@ import "slick-carousel/slick/slick-theme.css";
 // Example of hardcoded game data
 const hardcodedGames = [
   {
-    _id: "679e37bb4738965adff0d5db",
+    _id: "67b4ac2d31ccde86c71e56d3",
     name: "The Witcher 3: Wild Hunt",
     background_image:
       "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
     rating: 4.65,
   },
   {
-    _id: "679e37bb4738965adff0d6e2",
+    _id: "67b4ac2d31ccde86c71e5a80",
+    name: "Uncharted 4: A Thief’s End",
+    background_image:
+      "https://media.rawg.io/media/games/709/709bf81f874ce5d25d625b37b014cb63.jpg",
+    rating: 4.49,
+  },
+  {
+    _id: "67b4ad6d7834b4a51a464ba8",
+    name: "Marvel Rivals",
+    background_image:
+      "https://media.rawg.io/media/screenshots/3f0/3f0fdfc7c71655366aa83ab80ecab9b8.jpg",
+    rating: 3.85,
+  },
+  {
+    _id: "67b4ac2d31ccde86c71e5816",
     name: "Rise of the Tomb Raider",
     background_image:
       "https://media.rawg.io/media/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg",
     rating: 4.04,
   },
   {
-    _id: "679e37bb4738965adff0d676",
+    _id: "67b4ac2d31ccde86c71e578c",
     name: "God of War (2018)",
     background_image:
       "https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg",
     rating: 4.56,
   },
   {
-    _id: "679e37bb4738965adff0d69a",
+    _id: "67b4ac2d31ccde86c71e57ba",
     name: "Cyberpunk 2077",
     background_image:
       "https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg",
     rating: 4.2,
   },
   {
-    _id: "679e37bb4738965adff0d6ba",
+    _id: "67b4ac2d31ccde86c71e57e2",
     name: "Warframe",
     background_image:
       "https://media.rawg.io/media/games/f87/f87457e8347484033cb34cde6101d08d.jpg",
@@ -52,7 +66,7 @@ export const FeaturedGames = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     arrows: true,
   };
 

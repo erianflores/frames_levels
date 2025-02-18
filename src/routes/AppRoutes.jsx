@@ -8,6 +8,7 @@ import Dashboard from "../pages/DashboardPage";
 import PrivateRoute from "./PrivateRoute";
 import SearchResults from "../pages/SearchResults";
 import OwnedGames from "../pages/OwnedGames";
+import Wishlist from "../pages/WishlistPage";
 // import ProfilePage from "../pages/ProfilePage";
 
 const AppRoutes = () => {
@@ -28,6 +29,7 @@ const AppRoutes = () => {
       <Route path="/games/:id" element={<GamePage />} />
       <Route path="/profile/:userId" element={<ProfilePage />} />
       <Route path="/owned/:userId" element={<OwnedGames />} />
+      <Route path="/wishlist/:userId" element={<Wishlist />} />
     </Routes>
   );
 };

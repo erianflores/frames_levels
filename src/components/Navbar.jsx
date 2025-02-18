@@ -125,7 +125,7 @@ function Navbar() {
         </h2>
         {isLoggedIn ? (
           <div className="navbar-user-info">
-            <span>Welcome, {user?.username}</span>
+            <span>{user?.username}</span>
 
             {user?.profilePicture && (
               <img
@@ -138,6 +138,24 @@ function Navbar() {
             <button onClick={handleProfileClick} className="profile-btn">
               Profile
             </button>
+            {user && (
+              <button
+                onClick={() => nav(`/owned/${user._id}`)}
+                className="owned-games-btn"
+              >
+                My Games
+              </button>
+            )}
+
+            {user && (
+              <button
+                onClick={() => nav(`/wishlist/${user._id}`)}
+                className="wishlist-btn"
+              >
+                Wishlist
+              </button>
+            )}
+
             <button onClick={handleLogout}>Logout</button>
           </div>
         ) : (
