@@ -39,7 +39,7 @@ function GameProvider({ children }) {
   };
 
   return (
-    <GameContext.Provider value={{ games, loadMoreGames, setFilters }}>
+    <GameContext.Provider value={{ games, loadMoreGames, filters, setFilters }}>
       {children}
     </GameContext.Provider>
   );

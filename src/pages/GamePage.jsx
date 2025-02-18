@@ -54,6 +54,25 @@ const GamePage = () => {
     }
   };
 
+  const handleAddToWishlist = async (gameId) => {
+    console.log("Current user:", user);
+    if (!user || !user._id) {
+      console.error("Invalid user:", user);
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `http://localhost:5005/users/${user._id}/wishlist`,
+        { gameId }
+      );
+      console.log("Game added to wishlist:", response.data);
+      setWishlist(true);
+    } catch (error) {
+      console.error("Error adding to owned list", error);
+    }
+  };
+
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("authToken");
@@ -120,9 +139,14 @@ const GamePage = () => {
 
       <div className="game-favorites">
         <button onClick={() => handleAddToOwned(game._id)} disabled={owned}>
-          {owned ? "Owned" : "I Owned This"}
+          {owned ? "Owned" : "I Have This"}
         </button>
-        {/* <button onClick={handleAddToWishlist} disabled={wishlist}>I Want This</button> */}
+        <button
+          onClick={() => handleAddToWishlist(game._id)}
+          disabled={wishlist}
+        >
+          {wishlist ? "Wishlisted" : "I Want This"}
+        </button>
       </div>
       <p>
         <strong>Released:</strong>{" "}

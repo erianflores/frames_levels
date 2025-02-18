@@ -4,21 +4,19 @@ import { TopRatedGames } from "../components/TopRatedGames";
 //import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-
   //took the logout button out for now since its in the navbar :)
   //const nav = useNavigate();
 
- // const handleLogout = () => {
+  // const handleLogout = () => {
   //  localStorage.removeItem("authToken"); // Remove token
   //  nav("/"); // Redirect to public homepage
   //};
   return (
     <div className="home-page">
-      <h2 className="welcome-message">Welcome to the Dashboard</h2>
       {/*<button onClick={handleLogout}>Logout</button>*/}
-      
+
       <FeaturedGames />
-      <TopRatedGames /> 
+      <TopRatedGames />
       <GameList />
     </div>
   );

@@ -3,8 +3,15 @@ import { GameContext } from "../contexts/game.context";
 import GameCard from "./GameCard";
 
 function GameList() {
-  const { games, loadMoreGames } = useContext(GameContext);
+  const { games, loadMoreGames, filters } = useContext(GameContext);
   const observer = useRef();
+
+  const filteredGames = games.filter((game) => {
+    if (!filters.genres || filters.genres.length === 0) {
+      return true; // Show all games if no genre filters are selected
+    }
+    return game.genres.some((genre) => filters.genres.includes(genre.name));
+  });
 
   // Callback for infinite scrolling
   const lastGameRef = useCallback(
@@ -24,9 +31,9 @@ function GameList() {
 
   return (
     <div className="game-list">
-      {games.map((game, index) => (
+      {filteredGames.map((game, index) => (
         <div
-          ref={index === games.length - 1 ? lastGameRef : null}
+          ref={index === filteredGames.length - 1 ? lastGameRef : null}
           key={game._id}
         >
           <GameCard game={game} />

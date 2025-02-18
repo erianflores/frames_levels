@@ -7,16 +7,15 @@ function HomePage() {
   const navigate = useNavigate();
 
   const handleJoinUs = () => {
-     navigate("/signup"); 
+    navigate("/signup");
   };
   return (
     <div className="home-page">
-      <h2 className="welcome-message">Welcome to the Homepage</h2>
       <button className="join-us-button" onClick={handleJoinUs}>
         Join Us!
       </button>
       <FeaturedGames />
-      <TopRatedGames /> 
+      <TopRatedGames />
       <GameList />
     </div>
   );

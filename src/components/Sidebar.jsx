@@ -5,25 +5,48 @@ function Sidebar() {
   const { setFilters } = useContext(GameContext);
 
   const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
+    const { name, value, checked } = e.target;
+
+    setFilters((prevFilters) => {
+      console.log("Previous filters:", prevFilters);
+      if (name === "genre") {
+        const updatedGenres = checked
+          ? [...(prevFilters.genres || []), value]
+          : (prevFilters.genres || []).filter((g) => g !== value);
+
+        return { ...prevFilters, genres: updatedGenres };
+      }
+
+      return { ...prevFilters, [name]: value };
+    });
   };
 
   return (
     <aside className="sidebar">
       <h3>Filters</h3>
-      <input
-        type="text"
-        name="name"
-        placeholder="Search by name"
-        onChange={handleFilterChange}
-      />
-      <select name="genre" onChange={handleFilterChange}>
-        <option value="">All Genres</option>
-        <option value="Action">Action</option>
-        <option value="RPG">RPG</option>
-        <option value="Shooter">Shooter</option>
-      </select>
+
+      <h4>Genres</h4>
+      <div className="genre-filters">
+        {[
+          "Action",
+          "RPG",
+          "Shooter",
+          "Adventure",
+          "Indie",
+          "Platformer",
+          "Puzzle",
+        ].map((genre) => (
+          <label key={genre}>
+            <input
+              type="checkbox"
+              name="genre"
+              value={genre}
+              onChange={handleFilterChange}
+            />
+            {genre}
+          </label>
+        ))}
+      </div>
     </aside>
   );
 }

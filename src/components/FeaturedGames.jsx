@@ -39,11 +39,11 @@ const hardcodedGames = [
     background_image:
       "https://media.rawg.io/media/games/f87/f87457e8347484033cb34cde6101d08d.jpg",
     rating: 3.42,
-  }
+  },
 ];
 
 export const FeaturedGames = () => {
-  const games = hardcodedGames; 
+  const games = hardcodedGames;
 
   const settings = {
     dots: true,
@@ -51,28 +51,26 @@ export const FeaturedGames = () => {
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, 
-    autoplaySpeed: 3000, 
+    autoplay: true,
+    autoplaySpeed: 3000,
     arrows: true,
   };
 
   return (
     <section id="featured-games">
-      
       <Slider {...settings}>
         {games.map((game) => (
           <div key={game._id} className="game-item">
-            <h2>You will love:</h2>
             <Link to={`/games/${game._id}`}>
               <img
                 src={game.background_image || "https://via.placeholder.com/200"}
                 alt={game.name}
               />
-        
+
               <h3>{game.name}</h3>
             </Link>
             <p>⭐ Rating: {game.rating} / 5</p>
-            <p>{game.description}</p> 
+            <p>{game.description}</p>
           </div>
         ))}
       </Slider>
