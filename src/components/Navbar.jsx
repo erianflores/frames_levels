@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
+import { Spinner } from "../components/Spinner";
 
 function Navbar() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -11,6 +12,7 @@ function Navbar() {
   const nav = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -55,6 +57,7 @@ function Navbar() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     console.log("Login Data:", formData);
 
     try {
@@ -79,7 +82,8 @@ function Navbar() {
       nav("/dashboard");
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
-      error.response?.data?.message || "Login failed. Try again.";
+    } finally {
+      setIsLoading(false); 
     }
   }
 
@@ -160,6 +164,10 @@ function Navbar() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="navbar-form">
+             {isLoading ? (
+              <Spinner /> 
+            ) : (
+              <>
             <input
               type="email"
               name="email"
@@ -181,6 +189,8 @@ function Navbar() {
             <button type="submit" className="login-button-style">
               Login
             </button>
+            </>
+          )}
           </form>
         )}
       </div>

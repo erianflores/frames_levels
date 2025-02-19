@@ -14,10 +14,10 @@
   }
 
 .custom-spinner {
-    height: 200px;
+    height: 90px;
     animation: spin 1s linear infinite;
     border-radius: 50%;
-    margin-top: 10%;
+    margin-top: 14%;
   }
   @keyframes spin {
     100% {

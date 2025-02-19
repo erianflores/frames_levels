@@ -4,6 +4,7 @@ import GameCard from "../components/GameCard";
 import { AuthContext } from "../contexts/auth.context";
 import axios from "axios";
 import { API_URL } from "../config/config";
+import { Spinner } from "../components/Spinner";
 
 const OwnedGames = () => {
   const { id } = useParams();
@@ -35,7 +36,7 @@ const OwnedGames = () => {
     fetchOwnedGames();
   }, [user?._id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error: {error}</p>;
 
   return (

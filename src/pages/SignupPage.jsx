@@ -2,16 +2,21 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../config/config";
+import { Spinner } from "../components/Spinner";
+
 
 const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const nav = useNavigate();
 
   async function handleSignup(e) {
     e.preventDefault();
+    setIsLoading(true);
+
     const userToCreate = {
       username: name,
       email,
@@ -23,11 +28,16 @@ const SignupPage = () => {
       nav("/login");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <div className="signup-page">
+       {isLoading ? (
+        <Spinner /> // Show spinner while loading
+      ) : (
       <form className="signup-form" onSubmit={handleSignup}>
         <h3 className="signup-title">Signup Page</h3>
         <label className="input-label">Username:</label>
@@ -55,6 +65,7 @@ const SignupPage = () => {
           Signup
         </button>
       </form>
+      )}
     </div>
   );
 };

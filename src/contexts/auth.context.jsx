@@ -45,7 +45,7 @@ const AuthWrapper = ({ children }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       authenticateUser();
-    }, 3000);
+    }, 2000);
     return () => clearTimeout(timeout);
   }, [authenticateUser]);
 
