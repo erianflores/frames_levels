@@ -43,7 +43,10 @@ const AuthWrapper = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    authenticateUser();
+    const timeout = setTimeout(() => {
+      authenticateUser();
+    }, 3000);
+    return () => clearTimeout(timeout);
   }, [authenticateUser]);
 
   const handleLogin = (userData) => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Spinner } from "../components/Spinner";
 import womanImage from "../assets/woman.png";
 import manImage from "../assets/man.png";
 import catImage from "../assets/catgamer.png";
@@ -14,6 +15,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ username: "", email: "", profilePic: "" });
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -34,6 +36,8 @@ const ProfilePage = () => {
   ];
 
   const fetchUserData = async () => {
+    setLoading(true);
+
     const token = localStorage.getItem("authToken");
     if (!token) {
       setError("No authentication token found");
@@ -77,6 +81,8 @@ const ProfilePage = () => {
       }
     } catch (error) {
       setError("Error decoding token");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -84,6 +90,8 @@ const ProfilePage = () => {
     fetchUserData();
   }, [userIdFromURL, editing]);
 
+  if (loading) return <Spinner />;
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
