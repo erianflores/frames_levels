@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
+import { Spinner } from "../components/Spinner";
 
 const GamePage = () => {
   const { id } = useParams();
@@ -124,7 +125,7 @@ const GamePage = () => {
     }
   };
 
-  if (loading) return <p>Loading game details...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error: {error}</p>;
 
   return (
