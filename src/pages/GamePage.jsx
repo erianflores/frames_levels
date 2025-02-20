@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
 import { Spinner } from "../components/Spinner";
+import Footer from "../components/Footer";
 
 const GamePage = () => {
   const { id } = useParams();
@@ -224,6 +225,7 @@ const GamePage = () => {
           </ul>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

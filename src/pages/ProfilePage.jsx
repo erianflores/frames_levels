@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Spinner } from "../components/Spinner";
+import  Footer  from "../components/Footer";
 import womanImage from "../assets/woman.png";
 import manImage from "../assets/man.png";
 import catImage from "../assets/catgamer.png";
@@ -9,6 +10,7 @@ import coolImage from "../assets/cool.png";
 import kidImage from "../assets/kid.png";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
+
 
 const ProfilePage = () => {
   const { userId: userIdFromURL } = useParams();
@@ -192,7 +194,8 @@ const ProfilePage = () => {
   if (error) return <p className="error-message">{error}</p>;
 
   return (
-    <div className="profile-container">
+    <div>
+<div className="profile-container">
       <div className="profile-box">
         <h1 className="profile-header">Hi, {user.username}!</h1>
         {editing ? (
@@ -285,6 +288,8 @@ const ProfilePage = () => {
           ))
         )}
       </div>
+    </div>
+      <Footer />
     </div>
   );
 };
