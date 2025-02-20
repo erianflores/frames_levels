@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/auth.context";
 import axios from "axios";
 import { API_URL } from "../config/config";
 import { Spinner } from "../components/Spinner";
+import Footer from "../components/Footer";
 
 const Wishlist = () => {
   const { id } = useParams();
@@ -52,6 +53,7 @@ const Wishlist = () => {
           <p>No owned games yet.</p>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

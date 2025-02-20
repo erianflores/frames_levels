@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
 import { Spinner } from "../components/Spinner";
+import Footer from "../components/Footer";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -72,6 +73,7 @@ function LoginPage() {
         </button>
       </form>
       )}
+      <Footer />
     </div>
   );
 }

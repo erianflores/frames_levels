@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../config/config";
 import { Spinner } from "../components/Spinner";
+import Footer from "../components/Footer";
 
 
 const SignupPage = () => {
@@ -66,6 +67,7 @@ const SignupPage = () => {
         </button>
       </form>
       )}
+      <Footer />
     </div>
   );
 };

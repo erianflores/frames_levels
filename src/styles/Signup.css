@@ -8,17 +8,15 @@
     position: relative;
     text-align: center;
     margin-top: 3rem;
-    margin-left: 10rem;
+    margin-left: 14rem;
     
   }
   
-
-
   .signup-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+    width: 75%;
     background-color: #8d27f2bd;
     padding: 100px;
     border-radius: 8px;
