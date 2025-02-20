@@ -83,6 +83,9 @@ function Navbar() {
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
       error.response?.data?.message || "Login failed. Try again.";
+      finally {
+        setIsLoading(false); 
+      
     }
   }
 
