@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
 import logo from "../assets/Frames and Levels.png";
+import { Spinner } from "../components/Spinner";
+
 
 function Navbar() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -163,6 +165,10 @@ function Navbar() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="navbar-form">
+              {isLoading ? (
+            <Spinner /> 
+          ) : (
+            <>
             <input
               type="email"
               name="email"
@@ -184,6 +190,8 @@ function Navbar() {
             <button type="submit" className="login-button-style">
               Login
             </button>
+            </>
+          )}
           </form>
         )}
       </div>
