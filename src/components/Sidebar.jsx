@@ -48,6 +48,7 @@ function Sidebar() {
         ].map((genre) => (
           <label key={genre}>
             <input
+              className="filter-input"
               type="checkbox"
               name="genre"
               value={genre}

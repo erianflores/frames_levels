@@ -22,7 +22,7 @@
   margin-top: 80px;
 }
 
-.sidebar label {
+/* .sidebar label {
   display: block;
   margin: 10px 0 5px;
 }
@@ -32,7 +32,7 @@
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
-}
+} */
 
 .genre-filters {
   display: flex;
@@ -44,13 +44,20 @@
 }
 
 .genre-filters label {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.genre-filters label span {
+/* .genre-filters label span {
   margin-right: 10px;
   display: flex;
-}
+} */
 
-.genre-filters input[type="checkbox"] {
-  margin-left: 10%;
+.filter-input {
+  margin: 0;
+  margin-top: 10px;
+  background-color: rgb(230, 128, 4);
 }
