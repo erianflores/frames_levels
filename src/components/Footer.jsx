@@ -6,7 +6,7 @@ function Footer() {
     <footer className="footer">
       <svg
         className="wave-svg"
-        viewBox="0 5 1500 200"
+        viewBox="0 5 1000 200"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path

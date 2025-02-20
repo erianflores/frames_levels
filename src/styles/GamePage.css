@@ -4,7 +4,6 @@
   align-items: center;
   margin-left: 170px;
   margin-top: 80px;
-  max-width: 1200px;
   color: rgb(118, 117, 117)
 }
 
@@ -19,7 +18,9 @@
 
 .game-page-img {
   height: 400px;
-  width: auto;
+  width: 400px;
+  object-fit: cover;
+  margin-left: 300px;
   border-radius: 10px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 }

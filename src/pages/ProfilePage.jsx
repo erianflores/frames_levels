@@ -141,12 +141,14 @@ const ProfilePage = () => {
         });
 
         setContextUser({
+          _id: data.user._id,
           username: data.user.username,
           email: data.user.email,
           profilePic: data.user.profilePic,
         });
 
         setFormData({
+          _id: data.user._id,
           username: data.user.username,
           email: data.user.email,
           password: "",
