@@ -1,53 +1,53 @@
 .top-rated-games {
-    width: 100%;
-    max-width: 900px;
-    margin-left: 20%; 
-    position: relative;
-    margin-bottom: 50px;
-    text-align: center;
-    max-width: 900px; 
-    background: #969697; 
-    padding: 20px;
-    border-radius: 12px;
-    border: 3px solid #ffd013; 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 900px;
+  margin-left: 20%;
+  position: relative;
+  margin-bottom: 50px;
+  text-align: center;
+  max-width: 900px;
+  background: #8d27f2bd;
+  padding: 20px;
+  border-radius: 12px;
+  border: 3px solid #14c9abda;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .games-list {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px;
 }
 
 .game-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    width: 150px;
-    background-color: #f8f9fa;
-    text-decoration: none;
-    color: black;
-    transition: transform 0.2s ease-in-out;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 150px;
+  background-color: #f8f9fa;
+  text-decoration: none;
+  color: black;
+  transition: transform 0.2s ease-in-out;
 }
 
 .game-card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .game-image {
-    width: 100%;
-    border-radius: 8px;
+  width: 100%;
+  border-radius: 8px;
 }
 
 .game-title {
-    font-size: 14px;
-    margin: 5px 0;
+  font-size: 14px;
+  margin: 5px 0;
 }
 
 .game-rating {
-    font-size: 12px;
-    color: #ffcc00;
+  font-size: 12px;
+  color: #ffcc00;
 }

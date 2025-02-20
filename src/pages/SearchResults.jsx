@@ -27,7 +27,7 @@ function SearchResults() {
   return (
     <div className="game-search-page">
       <h2>Search Results for: "{query}"</h2>
-      <div className="game-list">
+      <div className="game-list-search">
         {searchResults.length > 0 ? (
           searchResults.map((game) => <GameCard key={game._id} game={game} />)
         ) : (

@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-  min-height: 100vh; 
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .join-us-button {
@@ -37,33 +37,33 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 50px;
   padding: 20px;
-  margin-left: 20%;
+  margin-left: 25%;
   max-width: 1200px;
 }
 
 @media (max-width: 1200px) {
   .game-list {
-    grid-template-columns: repeat(4, 1fr); 
-    margin-left: 0; 
+    grid-template-columns: repeat(4, 1fr);
+    margin-left: 0;
   }
 }
 
 @media (max-width: 1000px) {
   .game-list {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .game-list {
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 30px; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
   }
 }
 
 @media (max-width: 480px) {
   .game-list {
-    grid-template-columns: 1fr; 
-    gap: 20px; 
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

@@ -2,7 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 170px;
-  margin-top: 80px;
+  margin-top: 35px;
+  margin-left: 25%;
+  max-width: 1200px;
+  background-color: #0e1533;
+}
+
+.game-list-search {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+  padding: 20px;
+  margin-left: 0%;
   max-width: 1200px;
 }

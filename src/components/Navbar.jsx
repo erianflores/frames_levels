@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
-import { Spinner } from "../components/Spinner";
+import logo from "../assets/Frames and Levels.png";
 
 function Navbar() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -12,7 +12,6 @@ function Navbar() {
   const nav = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -57,7 +56,6 @@ function Navbar() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setIsLoading(true);
     console.log("Login Data:", formData);
 
     try {
@@ -82,8 +80,7 @@ function Navbar() {
       nav("/dashboard");
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
-    } finally {
-      setIsLoading(false); 
+      error.response?.data?.message || "Login failed. Try again.";
     }
   }
 
@@ -121,12 +118,11 @@ function Navbar() {
   return (
     <nav className="style-navbar">
       <div className="navbar-upper">
-        <h2
+        <img
+          src={logo}
           className="navbar-title"
           onClick={() => nav(isLoggedIn ? "/dashboard" : "/")}
-        >
-          Frames & Levels
-        </h2>
+        />
         {isLoggedIn ? (
           <div className="navbar-user-info">
             <span>{user?.username}</span>
@@ -164,10 +160,6 @@ function Navbar() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="navbar-form">
-             {isLoading ? (
-              <Spinner /> 
-            ) : (
-              <>
             <input
               type="email"
               name="email"
@@ -189,8 +181,6 @@ function Navbar() {
             <button type="submit" className="login-button-style">
               Login
             </button>
-            </>
-          )}
           </form>
         )}
       </div>

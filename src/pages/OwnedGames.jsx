@@ -40,7 +40,7 @@ const OwnedGames = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div className="owned-games-page">
       <h1>Owned Games</h1>
       <div className="game-list">
         {ownedGames.length > 0 ? (

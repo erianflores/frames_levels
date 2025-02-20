@@ -1,0 +1,9 @@
+.owned-games-page {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 35px;
+  margin-left: 25%;
+  max-width: 1200px;
+  color: #8d27f2bd;
+}

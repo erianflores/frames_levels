@@ -1,7 +1,7 @@
 .style-navbar {
   display: flex;
   flex-direction: column;
-  background-color: #9ca0a5;
+  background-color: #03dac6;
   padding-top: 5px;
   position: fixed;
   top: 0;
@@ -19,17 +19,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
-  height: 35px;
+  height: 40px;
 }
 
 .navbar-lower {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: #9ca0a5;
+  background-color: #249085;
   height: 35px;
-  padding: 5px;
-  border-radius: 20px
+  padding-bottom: 5px;
+  padding-top: 12px;
+  border-radius: 20px;
 }
 
 .search-input {
@@ -37,15 +38,18 @@
   width: 400px;
 }
 
-
 .navbar-title {
   cursor: pointer;
   pointer-events: auto;
-  z-index: 10; 
+  z-index: 10;
+  width: 160px;
+  height: 140px;
+  margin-top: 38px;
 }
 
-.profile-btn, .navbar-user-info button {
-  background-color: #0b4786; 
+.profile-btn,
+.navbar-user-info button {
+  background-color: #0b4786;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -55,12 +59,13 @@
   transition: background-color 0.3s ease;
 }
 
-.profile-btn:hover, .navbar-user-info button:hover {
-  background-color: #083366; 
+.profile-btn:hover,
+.navbar-user-info button:hover {
+  background-color: #083366;
 }
 
 .search-button-style {
-  background-color: #0b4786; 
+  background-color: #0b4786;
   color: white;
   border: none;
   padding: 6px 12px;
@@ -71,6 +76,6 @@
 }
 
 .search-button-style:hover {
-  background-color: #083366; 
-  transform: scale(1.05); 
+  background-color: #083366;
+  transform: scale(1.05);
 }

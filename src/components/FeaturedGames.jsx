@@ -75,7 +75,7 @@ export const FeaturedGames = () => {
       <Slider {...settings}>
         {games.map((game) => (
           <div key={game._id} className="game-item">
-            <h2>You will love:</h2>
+            {/* <h2>You will love:</h2> */}
             <Link to={`/games/${game._id}`} className="game-link">
               <div className="image-wrapper">
                 <img
