@@ -8,13 +8,14 @@
     text-align: center;
     margin-top: 3rem;
     margin-left: 10rem;
+    
   }
   
   .login-title {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #8d27f2bd;
   }
   
   
@@ -23,7 +24,7 @@
     flex-direction: column;
     gap: 20px;
     width: 120%;
-    background-color: #fff;
+    background: #8d27f2bd;
     padding: 100px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
