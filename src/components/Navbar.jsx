@@ -57,6 +57,7 @@ function Navbar() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     console.log("Login Data:", formData);
 
     try {
