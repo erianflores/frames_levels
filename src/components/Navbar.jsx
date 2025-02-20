@@ -78,16 +78,14 @@ function Navbar() {
       localStorage.setItem("authToken", data.authToken);
       await authenticateUser();
 
-      // Redirect to dashboard page
-      nav("/dashboard");
-    } catch (error) {
-      console.log("Login error:", error.response?.data || error.message);
-      error.response?.data?.message || "Login failed. Try again.";
-      finally {
+       // Redirect to dashboard page
+       nav("/dashboard");
+      } catch (error) {
+        console.log("Login error:", error.response?.data || error.message);
+      } finally {
         setIsLoading(false); 
-      
+      }
     }
-  }
 
   //profile navigation
   const handleProfileClick = async () => {
