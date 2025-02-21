@@ -1,8 +1,39 @@
-# React + Vite
+# 🎮 Frames and Levels
+## Frames and Levels is a full-stack web application where users can explore various games, add them to their owned collection or wishlist, and leave reviews. Users also have personal profiles where they can edit their username, email, password, or profile picture.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 🛠️ Features  
 
-Currently, two official plugins are available:
+🔍 Browse Games – Explore a wide selection of games.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎮 Game Collection – Add games to the Owned page or Wishlist.  
+
+📝 User Reviews – Write and manage reviews for games.  
+
+👤 User Profiles – Update username, email, password, and profile picture.  
+
+🔐 Authentication – Secure sign-up, log-in, and log-out functionality.  
+
+🌍 REST API Backend – Built with Express.js and MongoDB.  
+
+### ⚙️ Tech Stack
+* Frontend  
+
+React (Single Page Application)  
+
+React Router (for navigation)
+
+CSS/Styled Components  
+
+* Backend  
+
+Express.js (REST API)
+MongoDB & Mongoose (Database)  
+
+JSON Web Token (JWT) for authentication  
+
+Bcrypt for password encryption  
+
+## Deployment
+Frontend: **[Frames & Levels](https://frames-and-levels.netlify.app/)**  
+
+Backend: [Frames & Levels backend](https://frames-levels-backend.onrender.com/)
