@@ -1,6 +1,6 @@
 .top-rated-games {
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   margin-left: 25%;
   position: relative;
   margin-bottom: 50px;
@@ -21,22 +21,6 @@
   padding: 10px;
 }
 
-.game-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-  width: 150px;
-  background-color: #f8f9fa;
-  text-decoration: none;
-  color: black;
-  transition: transform 0.2s ease-in-out;
-}
-
-.game-card:hover {
-  transform: scale(1.05);
-}
-
 .game-image {
   width: 100%;
   border-radius: 8px;
@@ -45,6 +29,7 @@
 .game-title {
   font-size: 14px;
   margin: 5px 0;
+  text-decoration: none;
 }
 
 .game-rating {

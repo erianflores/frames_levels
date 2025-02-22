@@ -7,10 +7,17 @@ function GameList() {
   const observer = useRef();
 
   const filteredGames = games.filter((game) => {
-    if (!filters.genres || filters.genres.length === 0) {
-      return true; // Show all games if no genre filters are selected
-    }
-    return game.genres.some((genre) => filters.genres.includes(genre.name));
+    // Genre filtering
+    const matchesGenre =
+      !filters.genres?.length ||
+      game.genres.some((genre) => filters.genres.includes(genre.name));
+
+    // Platform filtering
+    const matchesPlatform =
+      !filters.platforms?.length ||
+      game.platforms.some((p) => filters.platforms.includes(p.platform.name));
+
+    return matchesGenre && matchesPlatform;
   });
 
   // Callback for infinite scrolling

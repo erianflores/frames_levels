@@ -43,7 +43,7 @@ const OwnedGames = () => {
   return (
     <div className="owned-games-page">
       <h1>Owned Games</h1>
-      <div className="game-list">
+      <div className="game-list-search">
         {ownedGames.length > 0 ? (
           ownedGames.map((game) => <GameCard key={game._id} game={game} />)
         ) : (

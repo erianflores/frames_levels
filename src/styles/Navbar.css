@@ -36,6 +36,8 @@
 .search-input {
   padding: 5px;
   width: 400px;
+  border-radius: 10px;
+  background-color: rgba(240, 240, 240, 0.843);
 }
 
 .navbar-title {
@@ -49,7 +51,7 @@
 
 .profile-btn,
 .navbar-user-info button {
-  background-color: #0b4786;
+  background-color: #134881;
   color: white;
   border: none;
   padding: 6px 12px;

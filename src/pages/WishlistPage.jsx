@@ -44,9 +44,9 @@ const Wishlist = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div className="wishlist-page">
       <h1>Wishlist</h1>
-      <div className="game-list">
+      <div className="game-list-search">
         {wishedGames.length > 0 ? (
           wishedGames.map((game) => <GameCard key={game._id} game={game} />)
         ) : (

@@ -1,3 +1,44 @@
 .game-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 150px;
   background-color: rgba(146, 225, 225, 0.841);
+  text-decoration: none;
+  color: black;
+  transition: transform 0.2s ease-in-out;
 }
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-info h3 {
+  font-family: "Fira Sans", serif;
+  font-weight: 400;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.released-info {
+  font-size: 15px;
+}
+
+.extra-info p {
+  font-family: "Fira Sans", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.game-card a {
+  text-decoration: none;
+}
+
+/* .extra-info {
+  display: none;
+}
+
+.game-card:hover .extra-info {
+  display: block;
+} */

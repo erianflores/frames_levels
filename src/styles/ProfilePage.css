@@ -2,8 +2,12 @@
   padding-left: 60px;
   margin: 50px 20px auto;
   text-align: center;
-  margin-left: 25%;
   z-index: 1;
+}
+
+.profile-page {
+  margin-left: 25%;
+  width: 100%;
 }
 
 .profile-header {
@@ -93,6 +97,7 @@
   align-content: center;
   gap: 20px;
   padding: 10px;
+  max-width: 1200px;
 }
 
 .review-box {

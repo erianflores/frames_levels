@@ -35,10 +35,11 @@
 .game-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 50px;
+  gap: 30px;
   padding: 20px;
   margin-left: 25%;
-  max-width: 1200px;
+  max-width: 1000px;
+  text-decoration: none;
 }
 
 @media (max-width: 1200px) {

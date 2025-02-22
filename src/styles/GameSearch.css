@@ -4,14 +4,18 @@
   align-items: flex-start;
   margin-top: 35px;
   margin-left: 25%;
-  max-width: 1200px;
+  max-width: 1000px;
   background-color: #0e1533;
+}
+
+.game-search-page h2 {
+  color: #8d27f2bd;
 }
 
 .game-list-search {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 50px;
+  gap: 30px;
   padding: 20px;
   margin-left: 0%;
   max-width: 1200px;

@@ -1,16 +1,15 @@
 .footer {
-    position: relative;
-    color: white;
-    text-align: center;
-    margin: 0;
-    width: 100%;
-    z-index: -100000;
-    
-    
-  }
-  .wave-svg {
-    bottom: 0;
-    width: 100%; 
-    height: 250px; 
-    z-index: -111111;
-  }
+  position: relative;
+  color: white;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  z-index: -100000;
+  margin-top: 8%;
+}
+.wave-svg {
+  bottom: 0;
+  width: 100%;
+  height: 250px;
+  z-index: -111111;
+}

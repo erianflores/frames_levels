@@ -20,6 +20,13 @@ function Sidebar() {
 
         return { ...prevFilters, genres: updatedGenres };
       }
+      if (name === "platform") {
+        const updatedPlatforms = checked
+          ? [...(prevFilters.platform || []), value]
+          : (prevFilters.platform || []).filter((g) => g !== value);
+
+        return { ...prevFilters, platforms: updatedPlatforms };
+      }
 
       return { ...prevFilters, [name]: value };
     });
@@ -55,6 +62,33 @@ function Sidebar() {
               onChange={handleFilterChange}
             />
             {genre}
+          </label>
+        ))}
+      </div>
+
+      <h4>Platforms</h4>
+      <div className="genre-filters">
+        {[
+          "PlayStation 5",
+          "Xbox Series S/X",
+          "PC",
+          "Nintendo Switch",
+          "PlayStation 4",
+          "PlayStation 3",
+          "Xbox 360",
+          "Xbox One",
+          "macOS",
+          "Mobile",
+        ].map((platform) => (
+          <label key={platform}>
+            <input
+              className="filter-input"
+              type="checkbox"
+              name="platform"
+              value={platform}
+              onChange={handleFilterChange}
+            />
+            {platform}
           </label>
         ))}
       </div>

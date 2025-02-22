@@ -4,7 +4,18 @@
   align-items: center;
   margin-left: 170px;
   margin-top: 80px;
-  color: rgb(118, 117, 117)
+  color: rgb(187, 187, 187);
+}
+
+.game-page h1 {
+  font-family: "Fira Sans", serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 45px;
+  color: #9fa7a6;
+  border: #00ffee;
+  border-radius: 3px;
+  -webkit-text-stroke: 1px #00ffee;
 }
 
 .game-page-content {
@@ -18,9 +29,9 @@
 
 .game-page-img {
   height: 400px;
-  width: 400px;
+  width: 500px;
   object-fit: cover;
-  margin-left: 300px;
+  margin-left: 20%;
   border-radius: 10px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -62,7 +73,7 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 800px; 
+  max-width: 800px;
   background-color: #8d27f2bd;
   border: 2px solid #00ffee;
   padding: 20px;
@@ -75,7 +86,7 @@
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  min-height: 150px; 
+  min-height: 150px;
   font-size: 1rem;
 }
 
@@ -105,10 +116,10 @@
   margin-top: 10px;
   font-size: 0.9rem;
   font-size: 0.9rem;
-  display: block; 
+  display: block;
   margin-left: auto;
-  margin-right: auto; 
-  width: auto; 
+  margin-right: auto;
+  width: auto;
   text-align: center;
 }
 
@@ -134,7 +145,7 @@
   padding: 15px;
   border-radius: 10px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-  width: 300px; 
+  width: 300px;
   min-height: 150px;
   display: flex;
   flex-direction: column;
@@ -150,4 +161,3 @@
   margin: 5px 0;
   font-size: 1rem;
 }
-

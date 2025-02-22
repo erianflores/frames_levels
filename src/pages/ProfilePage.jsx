@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Spinner } from "../components/Spinner";
-import  Footer  from "../components/Footer";
+import Footer from "../components/Footer";
 import womanImage from "../assets/woman.png";
 import manImage from "../assets/man.png";
 import catImage from "../assets/catgamer.png";
@@ -10,7 +10,6 @@ import coolImage from "../assets/cool.png";
 import kidImage from "../assets/kid.png";
 import { AuthContext } from "../contexts/auth.context";
 import { API_URL } from "../config/config";
-
 
 const ProfilePage = () => {
   const { userId: userIdFromURL } = useParams();
@@ -84,7 +83,7 @@ const ProfilePage = () => {
     } catch (error) {
       setError("Error decoding token");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -93,7 +92,7 @@ const ProfilePage = () => {
   }, [userIdFromURL, editing]);
 
   if (loading) return <Spinner />;
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -196,101 +195,101 @@ const ProfilePage = () => {
   if (error) return <p className="error-message">{error}</p>;
 
   return (
-    <div>
-<div className="profile-container">
-      <div className="profile-box">
-        <h1 className="profile-header">Hi, {user.username}!</h1>
-        {editing ? (
-          <form className="profile-form" onSubmit={handleUpdate}>
-            <label>Username:</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
-
-            <label>Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Leave blank to keep current email"
-            />
-
-            <label>New Password:</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Leave blank to keep current password"
-            />
-
-            <label>Profile Picture:</label>
-            <div className="profile-pic-options">
-              {profilePictures.map((pic, index) => (
-                <img
-                  key={index}
-                  src={pic}
-                  alt={`Profile option ${index + 1}`}
-                  className={`profile-pic-option ${
-                    formData.profilePic === pic ? "selected" : ""
-                  }`}
-                  onClick={() => handleProfilePicSelect(pic)}
-                />
-              ))}
-            </div>
-
-            <button type="submit" className="save-button">
-              Save Changes
-            </button>
-            <button
-              type="button"
-              onClick={() => setEditing(false)}
-              className="cancel-button"
-            >
-              Cancel
-            </button>
-          </form>
-        ) : (
-          <div className="profile-info">
-            <div className="profile-picture-container">
-              <img
-                src={user.profilePic}
-                alt="Profile"
-                className="profile-picture"
+    <div className="profile-page">
+      <div className="profile-container">
+        <div className="profile-box">
+          <h1 className="profile-header">Hi, {user.username}!</h1>
+          {editing ? (
+            <form className="profile-form" onSubmit={handleUpdate}>
+              <label>Username:</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
               />
-            </div>
 
-            <button onClick={() => setEditing(true)} className="edit-button">
-              Edit Profile
-            </button>
-            <button onClick={handleDelete} className="delete-button">
-              Delete Account
-            </button>
-          </div>
-        )}
-      </div>
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Leave blank to keep current email"
+              />
 
-      <h2 className="title-review-box">{user.username}'s reviews</h2>
-      <div className="reviews-container">
-        {Array.isArray(reviews) && reviews.length === 0 ? (
-          <p>No reviews yet</p>
-        ) : (
-          Array.isArray(reviews) &&
-          reviews.map((review) => (
-            <div key={review._id} className="review-box">
-              <p className="review-title">{review.gameTitle}</p>
-              <p className="review-body">{review.body}</p>
-              <p className="review-rating">⭐ {review.rating} / 5</p>
+              <label>New Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Leave blank to keep current password"
+              />
+
+              <label>Profile Picture:</label>
+              <div className="profile-pic-options">
+                {profilePictures.map((pic, index) => (
+                  <img
+                    key={index}
+                    src={pic}
+                    alt={`Profile option ${index + 1}`}
+                    className={`profile-pic-option ${
+                      formData.profilePic === pic ? "selected" : ""
+                    }`}
+                    onClick={() => handleProfilePicSelect(pic)}
+                  />
+                ))}
+              </div>
+
+              <button type="submit" className="save-button">
+                Save Changes
+              </button>
+              <button
+                type="button"
+                onClick={() => setEditing(false)}
+                className="cancel-button"
+              >
+                Cancel
+              </button>
+            </form>
+          ) : (
+            <div className="profile-info">
+              <div className="profile-picture-container">
+                <img
+                  src={user.profilePic}
+                  alt="Profile"
+                  className="profile-picture"
+                />
+              </div>
+
+              <button onClick={() => setEditing(true)} className="edit-button">
+                Edit Profile
+              </button>
+              <button onClick={handleDelete} className="delete-button">
+                Delete Account
+              </button>
             </div>
-          ))
-        )}
+          )}
+        </div>
+
+        <h2 className="title-review-box">{user.username}'s reviews</h2>
+        <div className="reviews-container">
+          {Array.isArray(reviews) && reviews.length === 0 ? (
+            <p>No reviews yet</p>
+          ) : (
+            Array.isArray(reviews) &&
+            reviews.map((review) => (
+              <div key={review._id} className="review-box">
+                <p className="review-title">{review.gameTitle}</p>
+                <p className="review-body">{review.body}</p>
+                <p className="review-rating">⭐ {review.rating} / 5</p>
+              </div>
+            ))
+          )}
+        </div>
       </div>
-    </div>
       <Footer />
     </div>
   );

@@ -36,9 +36,40 @@ const GamePage = () => {
         setError(error.message);
         setLoading(false);
       });
-  }, [id]);
+
+    if (user?._id) {
+      axios
+        .get(`${API_URL}/users/${user._id}/owned`)
+        .then((response) => {
+          const isOwned = response.data.some((g) => g._id === id);
+          setOwned(isOwned);
+        })
+        .catch((err) =>
+          console.error("Error checking if the game is owned", err)
+        );
+    }
+  }, [id, user?._id]);
 
   const handleAddToOwned = async (gameId) => {
+    if (!user || !user._id) {
+      console.error("Invalid user:", user);
+      return;
+    }
+
+    try {
+      if (owned) {
+        await axios.delete(`${API_URL}/users/${user._id}/owned/${gameId}`);
+        setOwned(false);
+      } else {
+        await axios.post(`${API_URL}/users/${user._id}/owned`, { gameId });
+        setOwned(true);
+      }
+    } catch (error) {
+      console.error("Error toggling ownership:", error);
+    }
+  };
+
+  const handleRemoveFromOwned = async (gameId) => {
     console.log("Current user:", user);
     if (!user || !user._id) {
       console.error("Invalid user:", user);
@@ -46,13 +77,13 @@ const GamePage = () => {
     }
 
     try {
-      const response = await axios.post(`${API_URL}/users/${user._id}/owned`, {
-        gameId,
-      });
-      console.log("Game added to owned list:", response.data);
-      setOwned(true);
+      const response = await axios.delete(
+        `${API_URL}/users/${user._id}/owned/${gameId}`
+      );
+      console.log("Game removed from owned list:", response.data);
+      setOwned(false);
     } catch (error) {
-      console.error("Error adding to owned list", error);
+      console.error("Error removing from owned list", error);
     }
   };
 
@@ -144,8 +175,14 @@ const GamePage = () => {
           </p>
 
           <div className="game-favorites">
-            <button onClick={() => handleAddToOwned(game._id)} disabled={owned}>
-              {owned ? "Owned" : "I Have This"}
+            <button
+              onClick={() =>
+                owned
+                  ? handleRemoveFromOwned(game._id)
+                  : handleAddToOwned(game._id)
+              }
+            >
+              {owned ? "Remove" : "I Have This"}
             </button>
             <button
               onClick={() => handleAddToWishlist(game._id)}

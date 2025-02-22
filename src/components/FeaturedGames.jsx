@@ -24,6 +24,13 @@ const hardcodedGames = [
     name: "Marvel Rivals",
     background_image:
       "https://media.rawg.io/media/screenshots/3f0/3f0fdfc7c71655366aa83ab80ecab9b8.jpg",
+    rating: 4.59,
+  },
+  {
+    _id: "67b4ac2d31ccde86c71e5726",
+    name: "Red Dead Redemption 2",
+    background_image:
+      "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",
     rating: 3.85,
   },
   {
