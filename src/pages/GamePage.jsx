@@ -19,35 +19,42 @@ const GamePage = () => {
   const [wishlist, setWishlist] = useState(false);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/games/one-game/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setGame(data);
+    const fetchGameDetails = async () => {
+      try {
+        const gameResponse = await fetch(`${API_URL}/api/games/one-game/${id}`);
+        const gameData = await gameResponse.json();
+        setGame(gameData);
         setLoading(false);
 
-        return fetch(`${API_URL}/api/reviews/one-game/${data._id}`);
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        setReviews(Array.isArray(data) ? data : []);
-      })
-      .catch((error) => {
+        if (gameData?._id) {
+          const reviewsResponse = await fetch(
+            `${API_URL}/api/reviews/one-game/${gameData._id}`
+          );
+          const reviewsData = await reviewsResponse.json();
+          setReviews(Array.isArray(reviewsData) ? reviewsData : []);
+        }
+
+        if (user?._id) {
+          const ownedResponse = await axios.get(
+            `${API_URL}/users/${user._id}/owned`
+          );
+          const isOwned = ownedResponse.data.some((g) => g._id === id);
+          setOwned(isOwned);
+
+          const wishlistResponse = await axios.get(
+            `${API_URL}/users/${user._id}/wishlist`
+          );
+          const isWishlisted = wishlistResponse.data.some((g) => g._id === id);
+          setWishlist(isWishlisted);
+        }
+      } catch (error) {
         console.error("Error fetching game details:", error);
         setError(error.message);
         setLoading(false);
-      });
+      }
+    };
 
-    if (user?._id) {
-      axios
-        .get(`${API_URL}/users/${user._id}/owned`)
-        .then((response) => {
-          const isOwned = response.data.some((g) => g._id === id);
-          setOwned(isOwned);
-        })
-        .catch((err) =>
-          console.error("Error checking if the game is owned", err)
-        );
-    }
+    fetchGameDetails();
   }, [id, user?._id]);
 
   const handleAddToOwned = async (gameId) => {
