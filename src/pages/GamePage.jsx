@@ -95,14 +95,33 @@ const GamePage = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${API_URL}/users/${user._id}/wishlist`,
-        { gameId }
-      );
-      console.log("Game added to wishlist:", response.data);
-      setWishlist(true);
+      if (wishlist) {
+        await axios.delete(`${API_URL}/users/${user._id}/wishlist/${gameId}`);
+        setWishlist(false);
+      } else {
+        await axios.post(`${API_URL}/users/${user._id}/wishlist`, { gameId });
+        setWishlist(true);
+      }
     } catch (error) {
-      console.error("Error adding to owned list", error);
+      console.error("Error toggling ownership:", error);
+    }
+  };
+
+  const handleRemoveFromWishlist = async (gameId) => {
+    console.log("Current user:", user);
+    if (!user || !user._id) {
+      console.error("Invalid user:", user);
+      return;
+    }
+
+    try {
+      const response = await axios.delete(
+        `${API_URL}/users/${user._id}/wishlist/${gameId}`
+      );
+      console.log("Game removed from wishlist list:", response.data);
+      setWishlist(false);
+    } catch (error) {
+      console.error("Error removing from wishlist list", error);
     }
   };
 
@@ -185,10 +204,13 @@ const GamePage = () => {
               {owned ? "Remove" : "I Have This"}
             </button>
             <button
-              onClick={() => handleAddToWishlist(game._id)}
-              disabled={wishlist}
+              onClick={() =>
+                wishlist
+                  ? handleRemoveFromWishlist(game._id)
+                  : handleAddToWishlist(game._id)
+              }
             >
-              {wishlist ? "Wishlisted" : "I Want This"}
+              {wishlist ? "Already on my list!" : "Add to Wishlist"}
             </button>
           </div>
           <p>
