@@ -211,6 +211,7 @@ const GamePage = () => {
               {owned ? "Remove" : "I Have This"}
             </button>
             <button
+              className="button-remove"
               onClick={() =>
                 wishlist
                   ? handleRemoveFromWishlist(game._id)
